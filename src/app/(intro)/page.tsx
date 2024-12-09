@@ -1,18 +1,31 @@
+import Button from '@/components/Button'
+import Guide from '@/components/Guide'
+import Header from '@/components/Header'
+
 const page = () => {
+  // grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)]
   return (
     <>
-      <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-        <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
-          <div className="mx-auto max-w-sm rounded-lg bg-white p-6 shadow-lg md:max-w-lg lg:max-w-xl xl:max-w-2xl">
-            <h2 className="mb-2 text-2xl font-bold text-gray-800">
-              Next.js 카드
-            </h2>
-            <p className="text-gray-700">
-              Tailwind CSS를 사용하여 각기 다른 화면 크기에서 최적화된
-              레이아웃을 쉽게 구현할 수 있습니다.
-            </p>
+      <div className="flex h-screen flex-col text-center">
+        <Header isShowBackBtn={false} width={25}></Header>
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <div>
+            <img src="/images/img.png" alt="" />
           </div>
-        </main>
+          <h2 className="font-pretendardSemiBold text-[2rem]">
+            만나서 반가워요!
+          </h2>
+          <Guide
+            text1="저는 당신의 진로를 안내해줄 모모에요"
+            text2="진로에 대해 같이 찾아볼까요"
+          />
+        </div>
+        <div className="mb-8 px-5">
+          <Button
+            className="w-full rounded-lg bg-black py-4 text-white"
+            text="안녕 모모!"
+          />
+        </div>
       </div>
     </>
   )
