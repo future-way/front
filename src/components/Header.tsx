@@ -1,3 +1,5 @@
+'use client'
+
 import Button from './Button'
 
 interface type {
@@ -10,7 +12,7 @@ const Header = ({ width, isShowBackBtn }: type) => {
   return (
     <header className="w-full">
       <img src="" alt="" />
-      <h1 className="text-gray1 relative py-3 text-base">
+      <h1 className="relative py-3 text-base text-gray1">
         {isShowBackBtn ? (
           <Button
             className="absolute inset-y-0 left-[10px]"
@@ -21,8 +23,8 @@ const Header = ({ width, isShowBackBtn }: type) => {
         )}
         내일 찾기
       </h1>
-      <div className="bg-gray2 h-1 w-full">
-        <div className="bg-green h-1" style={{ width: `${width}%` }}></div>
+      <div className="h-1 w-full bg-gray2">
+        <div className="h-1 bg-green" style={{ width: `${width}%` }}></div>
       </div>
     </header>
   )

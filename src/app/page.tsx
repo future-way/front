@@ -5,7 +5,7 @@ import {
   dehydrate,
 } from '@tanstack/react-query'
 
-import Intro from './(intro)/page'
+import Logo from './logo'
 
 export default async function Home() {
   const queryClient = new QueryClient()
@@ -26,5 +26,5 @@ export default async function Home() {
 
   // const clientValue = useQuery({ queryKey: ['poosts'], queryFn: getPosts });
 
-  return <Intro />
+  return <Logo></Logo>
 }

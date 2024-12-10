@@ -9,22 +9,22 @@ const page = () => {
         <div className="relative mx-4 my-8 flex h-full flex-col justify-end rounded-3xl bg-[linear-gradient(180deg,_#FFAA8E,_#FF765E)]">
           <div className="top-choice-text absolute w-full">
             <span className="inline-block rounded-full bg-green px-5 py-2 font-pretendardSemiBold text-[1.0625rem] text-white">
-              혼란형-확신
+              막막형
             </span>
             <TItle
-              text1="관심있는 분야가"
-              text2="확실하시군요"
+              text1="가고자 하는 길은 있는데"
+              text2="준비가 막막하시군요"
               img=""
               className="color-white mb-6 text-white"
             />
             <Guide
-              text1="그럼 저와 함께"
-              text2=" 구체적인 직업을 골라봐요!"
+              text1="원하는 꿈을 이룰 수 있도록"
+              text2="제가 도와드릴게요!"
               className="text-white"
             />
           </div>
           <div>
-            <img src="/images/img8.png" alt="혼란형-확신 마스코트" />
+            <img src="/images/img7.png" alt="막막함 마스코트" />
           </div>
         </div>
       </main>

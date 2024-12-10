@@ -10,10 +10,14 @@ export default {
     extend: {
       colors: {
         black: '#2E3033',
-        green: '#4BCA80',
+        green: '#FF765E',
+        orange2: '#FFAA8E',
         deactivaction: '#E4E7ED',
         gray1: '#667277',
         gray2: '#E5E8EB',
+        gray3: '#D9DCE2',
+        gray4: '#BEC5CF',
+        gray5: '#F5F6F7',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
@@ -28,5 +32,6 @@ export default {
       },
     },
   },
+  mode: 'jit',
   plugins: [],
 } satisfies Config

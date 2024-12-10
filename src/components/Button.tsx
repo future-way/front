@@ -1,12 +1,16 @@
+'use client'
 interface buttonType {
   text: string | React.ReactNode
   className?: string
+  onclick: () => void
 }
 
-const Button = ({ text, className }: buttonType) => {
+const Button = ({ text, className, onclick }: buttonType) => {
   return (
     <>
-      <button className={className}>{text}</button>
+      <button onClick={onclick} className={`w-full rounded-lg ${className}`}>
+        {text}
+      </button>
     </>
   )
 }
