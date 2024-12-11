@@ -1,7 +1,9 @@
+import Chat from './chat'
+
 const page = () => {
   return (
     <>
-      <div>chat</div>
+      <Chat></Chat>
     </>
   )
 }
