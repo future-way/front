@@ -11,7 +11,6 @@ interface type {
 const Header = ({ width, isShowBackBtn }: type) => {
   return (
     <header className="w-full">
-      <img src="" alt="" />
       <h1 className="relative py-3 text-base text-gray1">
         {isShowBackBtn ? (
           <Button

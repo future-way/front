@@ -12,6 +12,7 @@ export default {
         black: '#2E3033',
         green: '#FF765E',
         orange2: '#FFAA8E',
+        orange3: '#FFF1EF',
         deactivaction: '#E4E7ED',
         gray1: '#667277',
         gray2: '#E5E8EB',
@@ -28,6 +29,7 @@ export default {
       },
       fontSize: {
         xxs: '0.685rem',
+        m: '0.9375rem',
         slg: '1.0625rem',
       },
     },

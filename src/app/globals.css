@@ -37,3 +37,9 @@ body {
     top: calc(50% - 200px);
   }
 }
+
+@layer utilities {
+  .marker-black::marker {
+    color: #2e3033;
+  }
+}

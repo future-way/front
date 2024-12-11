@@ -2,7 +2,7 @@
 interface buttonType {
   text: string | React.ReactNode
   className?: string
-  onclick: () => void
+  onclick?: () => void
 }
 
 const Button = ({ text, className, onclick }: buttonType) => {
