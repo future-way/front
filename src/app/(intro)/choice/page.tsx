@@ -9,7 +9,7 @@ const page = () => {
       <main className="flex flex-1 flex-col items-center justify-center">
         <TItle
           text1="진로에 대해"
-          text2="어떤 고민이 있으신가요"
+          text2="어떤 진로 고민이 있나요?"
           img="/images/img2.png"
           className="mb-6 mt-0 font-black"
         />
@@ -22,7 +22,7 @@ const page = () => {
       <ButtonBar
         path="/type"
         text="다음으로"
-        className="bg-black py-4 text-white"
+        className="bg-black py-4 font-bold text-white"
       />
     </>
   )

@@ -26,7 +26,7 @@ const CircularProgressBar: FC<Props> = (props) => {
         strokeWidth={`${strokeWidth}px`}
       />
       <circle
-        className="fill-none stroke-green transition-all delay-200 ease-in"
+        className="stroke-orange1 fill-none transition-all delay-200 ease-in"
         cx={sqSize / 2}
         cy={sqSize / 2}
         r={radius}

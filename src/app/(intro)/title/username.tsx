@@ -21,8 +21,8 @@ const UserName = () => {
         placeholder="내 이름은.."
       />
       <p className="font-pretendardSemiBold text-gray1">
-        <span className="text-gray4 font-pretendardMedium">{name.length}</span>
-        /10
+        <span className="text-gray4 font-pretendardMedium">{name.length} </span>
+        / 10
       </p>
     </div>
   )

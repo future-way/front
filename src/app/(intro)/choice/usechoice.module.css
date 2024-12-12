@@ -1,6 +1,7 @@
 .chat_container {
   background: url('/images/line.png') no-repeat;
   background-position: 30px 24px;
+  background-size: 3px auto;
 }
 
 .button {
@@ -13,7 +14,7 @@
 }
 
 .bubble {
-  background-color: rgba(255, 118, 94, 0.5);
+  background-color: rgba(255, 118, 94, 0.05);
   border-radius: 16px;
   padding: 10px 16px;
   display: flex;
@@ -41,6 +42,6 @@
 .circle {
   width: 16px;
   height: 16px;
-  background-color: #e5e8eb;
+  background-color: #f5f6f7;
   border-radius: 50%;
 }

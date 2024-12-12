@@ -1,8 +1,8 @@
 const Card = () => {
   return (
-    <div className="mx-5 rounded-xl bg-white py-8">
+    <div className="mx-5 rounded-[1.25rem] bg-white py-8">
       <h2 className="text-2xl">
-        <span className="text-green">김내일</span>님 상담카드
+        <span className="text-orange1">김내일</span>님 상담카드
       </h2>
       <p className="text-m text-gray1">{new Date().toLocaleDateString()}</p>
       <div>
@@ -10,13 +10,13 @@ const Card = () => {
       </div>
       <div className="my-6">
         <ul className="flex flex-wrap justify-center gap-2">
-          <li className="bg-orange3 text-m inline-block rounded-full px-3.5 py-1.5 font-pretendardSemiBold text-green">
+          <li className="bg-orange3 text-m text-orange1 inline-block rounded-full px-3.5 py-1.5 font-pretendardSemiBold">
             진취적인 모험가
           </li>
-          <li className="bg-orange3 text-m inline-block rounded-full px-3.5 py-1.5 font-pretendardSemiBold text-green">
+          <li className="bg-orange3 text-m text-orange1 inline-block rounded-full px-3.5 py-1.5 font-pretendardSemiBold">
             탐구형
           </li>
-          <li className="bg-orange3 text-m inline-block rounded-full px-3.5 py-1.5 font-pretendardSemiBold text-green">
+          <li className="bg-orange3 text-m text-orange1 inline-block rounded-full px-3.5 py-1.5 font-pretendardSemiBold">
             노력형
           </li>
         </ul>

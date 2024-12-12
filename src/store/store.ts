@@ -1,15 +1,20 @@
 import { create } from 'zustand'
 
-// store의 타입을 정의해준다.
-interface Name {
+interface UserInfo {
   name: string
+  userId: number | null
   setUserName: (name: string) => void
+  setuserId: (userId: number) => void
 }
 
-export const useNameStore = create<Name>((set) => ({
+export const useNameStore = create<UserInfo>((set) => ({
   name: '',
+  userId: null,
   setUserName: (name) => {
     set((state) => ({ name }))
+  },
+  setuserId: (userId) => {
+    set((state) => ({ userId }))
   },
 }))
 

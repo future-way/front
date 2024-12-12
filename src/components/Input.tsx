@@ -22,7 +22,7 @@ const Input = ({
       <input
         type={type}
         value={value}
-        className={`border-gray4 w-full rounded-lg border p-3.5 text-gray1 ${clasName}`}
+        className={`border-gray7 w-full rounded-lg border p-3.5 text-gray1 ${clasName}`}
         onChange={onTextChange}
         placeholder={placeholder}
       />

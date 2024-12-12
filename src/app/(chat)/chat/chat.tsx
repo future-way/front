@@ -166,7 +166,7 @@ const Chat = () => {
           text={<img src="/images/icon-arrow-back.png" alt="뒤로가기" />}
         />
         <h1 className="py-3 text-center font-pretendardSemiBold text-base text-gray1">
-          내일 찾기
+          내일상담
         </h1>
         <Button
           onclick={onCounselClose}
@@ -200,7 +200,7 @@ const Chat = () => {
                 </>
               )}
               <div
-                className={`${msg.sender === 'user' ? 'bg-green' : 'bg-gray5'} ${checkUserOrApi(msg.sender)}`}
+                className={`${msg.sender === 'user' ? 'bg-orange1' : 'bg-gray5'} ${checkUserOrApi(msg.sender)}`}
                 style={{
                   padding: '8px 12px',
                 }}

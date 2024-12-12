@@ -15,7 +15,7 @@ const page = () => {
           className="mb-6 mt-0 font-black"
         />
         <Guide
-          text1="아직 해당 분야에 전문적인 지식이 없어도 괜찮아요."
+          text1="아직 해당 분야에"
           text2=" 전문적인 지식이 없어도 괜찮아요."
         />
         <YesOrNo></YesOrNo>

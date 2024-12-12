@@ -14,8 +14,14 @@ const Header = ({ width, isShowBackBtn }: type) => {
       <h1 className="relative py-3 text-base text-gray1">
         {isShowBackBtn ? (
           <Button
-            className="absolute inset-y-0 left-[10px]"
-            text={<img src="/images/icon-arrow-back.png" alt="뒤로가기" />}
+            className="absolute inset-y-0 left-[10px] w-6"
+            text={
+              <img
+                className="w-auto"
+                src="/images/icon-arrow-back.png"
+                alt="뒤로가기"
+              />
+            }
           />
         ) : (
           ''
@@ -23,7 +29,7 @@ const Header = ({ width, isShowBackBtn }: type) => {
         내일 찾기
       </h1>
       <div className="h-1 w-full bg-gray2">
-        <div className="h-1 bg-green" style={{ width: `${width}%` }}></div>
+        <div className="bg-orange1 h-1" style={{ width: `${width}%` }}></div>
       </div>
     </header>
   )

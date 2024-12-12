@@ -9,9 +9,11 @@ const TItle = ({ text1, text2, img, className }: titleType) => {
   return (
     <>
       <div>
-        <img src={img} alt="" />
+        <img className="m-auto" src={img} alt="" />
       </div>
-      <h2 className={`mt-5 font-pretendardSemiBold text-2xl ${className}`}>
+      <h2
+        className={`mt-5 font-pretendardSemiBold text-2xl font-semibold text-black ${className}`}
+      >
         {text1}
         <span className="block">{text2}</span>
       </h2>

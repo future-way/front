@@ -24,7 +24,7 @@ const Popup = ({
   return (
     <div className="fixed left-0 top-0 flex h-screen w-full items-center justify-center bg-black bg-opacity-50">
       <div className="mx-8 w-full rounded-2xl bg-white p-4 pt-7">
-        <h3 className="text-center font-pretendardBold text-xl text-black">
+        <h3 className="text-center font-pretendardBold text-xl font-bold text-black">
           {title1}
           <span className="block">{title2}</span>
         </h3>
@@ -34,13 +34,13 @@ const Popup = ({
         </p>
         <div className="flex gap-2">
           <Button
-            className="bg-gray6 rounded-xl py-3.5 text-slg text-gray1"
+            className="bg-gray6 rounded-2xl py-3.5 text-slg text-gray1"
             text={buttonName1}
             onclick={onclick1}
             isRounded
           />
           <Button
-            className="rounded-xl bg-black py-3.5 text-slg text-white"
+            className="rounded-2xl bg-black py-3.5 text-slg text-white"
             text={buttonName2}
             onclick={onclick2}
             isRounded

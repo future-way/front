@@ -75,7 +75,7 @@ const ResultCont = () => {
                 <Button
                   text="처음부터 다시하기"
                   onclick={() => setRestart((prev) => !prev)}
-                  className="bg-green py-4 text-white"
+                  className="bg-orange1 py-4 text-white"
                 />
               </div>
             </div>

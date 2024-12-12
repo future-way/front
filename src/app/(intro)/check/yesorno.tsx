@@ -30,15 +30,13 @@ const YesOrNo = () => {
           <button
             key={idx}
             onClick={() => onClickBtn(idx as 0 | 1)}
-            className={`${yesOrNo === idx ? 'bg-orange2 border border-green bg-opacity-50' : 'bg-gray5'} w-full rounded-2xl py-9`}
+            className={`${yesOrNo === idx ? 'bg-orange4 border bg-opacity-5' : 'bg-gray5'} border-orange4 w-full rounded-2xl py-9`}
           >
-            <img
-              className="m-auto mb-3"
-              src={`/images/img${item.img}.png`}
-              alt={item.imgAlt}
-            />
+            <div className="m-auto mb-3 w-[4.7rem]">
+              <img src={`/images/img${item.img}.png`} alt={item.imgAlt} />
+            </div>
             <span
-              className={`${yesOrNo === idx ? 'text-green' : 'text-gray1'} font-pretendardSemiBold text-slg`}
+              className={`${yesOrNo === idx ? 'text-orange1' : 'text-gray1'} font-pretendardSemiBold text-slg`}
             >
               {item.content}
             </span>
