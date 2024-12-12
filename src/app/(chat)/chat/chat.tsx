@@ -10,6 +10,14 @@ interface Message {
   timestamp: string // 메시지가 보낸 시간
 }
 
+function checkUserOrApi(sender: Message['sender']) {
+  if (sender === 'user') {
+    return 'rounded-tl-[0.75rem] rounded-tr-[0.75rem] rounded-br-[0px] rounded-bl-[0.75rem]'
+  } else {
+    return 'rounded-tl-[0px] rounded-tr-[0.75rem] rounded-br-[0.75rem] rounded-bl-[0.75rem]'
+  }
+}
+
 const ChatComponent: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]) // 메시지 상태
   const [input, setInput] = useState<string>('') // 입력 상태
@@ -105,7 +113,7 @@ const ChatComponent: React.FC = () => {
             >
               {msg.sender === 'api' && (
                 <>
-                  <div className="mb-1">
+                  <div className="mb-1 inline-flex items-center gap-2">
                     <img src="/images/img22.png" alt="" />
                     <p className="text-m font-pretendardSemiBold text-black">
                       모모
@@ -114,7 +122,7 @@ const ChatComponent: React.FC = () => {
                 </>
               )}
               <div
-                className={`${msg.sender === 'user' ? 'bg-green' : 'bg-gray5'} max-w-[80%] rounded-lg`}
+                className={`${msg.sender === 'user' ? 'bg-green' : 'bg-gray5'} ${checkUserOrApi(msg.sender)}`}
                 style={{
                   padding: '8px 12px',
                 }}

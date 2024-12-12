@@ -7,7 +7,7 @@ interface buttonType {
   type: string
   value?: string
   clasName?: string
-  onTextChange?: (e: ChangeEvent<HTMLInputElement>) => {}
+  onTextChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 const Input = ({

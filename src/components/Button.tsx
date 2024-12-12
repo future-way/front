@@ -6,9 +6,14 @@ interface buttonType {
 }
 
 const Button = ({ text, className, onclick }: buttonType) => {
+  const classNameArr = (className ?? '').split(' ')
+  const isWidthAuto = classNameArr.includes('w-auto')
   return (
     <>
-      <button onClick={onclick} className={`w-full rounded-lg ${className}`}>
+      <button
+        onClick={onclick}
+        className={`${isWidthAuto ? '' : 'w-full'} rounded-lg ${className}`}
+      >
         {text}
       </button>
     </>

@@ -21,7 +21,7 @@ const page = () => {
         <YesOrNo></YesOrNo>
       </main>
       <ButtonBar
-        path="/type"
+        path="/disarray-type"
         text="다음으로"
         className="bg-gray3 py-4 text-white"
       />

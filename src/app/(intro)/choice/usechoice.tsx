@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import style from './usechoice.module.css'
+import { choiceNumStore } from '@/store/store'
 
 const steps = [
   '무슨 일을 해야 할지 모르겠어요',
@@ -9,13 +10,13 @@ const steps = [
   '이 길로 가려면 뭘 해야 하는지 잘 모르겠어요',
 ]
 
-const imgList = [4,13,14]
+const imgList = [4, 13, 14]
 
 const UseChoice = () => {
-  const [active, setActive] = useState(0)
+  const { num, setChoiceNum } = choiceNumStore()
 
   const onClickBtn = (num: number) => {
-    setActive(num)
+    setChoiceNum(num as 0 | 1 | 2)
   }
 
   return (
@@ -27,13 +28,17 @@ const UseChoice = () => {
               <button
                 onClick={() => onClickBtn(idx)}
                 key={idx}
-                className={`w-full ${active === idx ? style.bubble : style.text}`}
+                className={`w-full ${num === idx ? style.bubble : style.text}`}
               >
-                <span className={`${active === idx ? '' : style.circle}`}>
-                  {active === idx ? <img src={`/images/img${imgList[idx]}.png`} alt="" /> : ''}
+                <span className={`${num === idx ? '' : style.circle}`}>
+                  {num === idx ? (
+                    <img src={`/images/img${imgList[idx]}.png`} alt="" />
+                  ) : (
+                    ''
+                  )}
                 </span>
                 <p
-                  className={`w-full rounded-lg ${active === idx ? 'text-green' : 'text-gray1'}`}
+                  className={`w-full rounded-lg ${num === idx ? 'text-green' : 'text-gray1'}`}
                 >
                   {step}
                 </p>

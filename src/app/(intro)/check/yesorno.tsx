@@ -1,5 +1,6 @@
 'use client'
 
+import { yesOrNoStore } from '@/store/store'
 import { useState } from 'react'
 
 const btnCont = [
@@ -16,10 +17,10 @@ const btnCont = [
 ]
 
 const YesOrNo = () => {
-  const [active, setActive] = useState(-1)
+  const { yesOrNo, setYesOrNo } = yesOrNoStore()
 
-  const onClickBtn = (num: number) => {
-    setActive(num)
+  const onClickBtn = (num: 0 | 1) => {
+    setYesOrNo(num)
   }
 
   return (
@@ -28,8 +29,8 @@ const YesOrNo = () => {
         return (
           <button
             key={idx}
-            onClick={() => onClickBtn(idx)}
-            className={`${active === idx ? 'bg-orange2 border border-green bg-opacity-50' : 'bg-gray5'} w-full rounded-2xl py-9`}
+            onClick={() => onClickBtn(idx as 0 | 1)}
+            className={`${yesOrNo === idx ? 'bg-orange2 border border-green bg-opacity-50' : 'bg-gray5'} w-full rounded-2xl py-9`}
           >
             <img
               className="m-auto mb-3"
@@ -37,7 +38,7 @@ const YesOrNo = () => {
               alt={item.imgAlt}
             />
             <span
-              className={`${active === idx ? 'text-green' : 'text-gray1'} font-pretendardSemiBold text-slg`}
+              className={`${yesOrNo === idx ? 'text-green' : 'text-gray1'} font-pretendardSemiBold text-slg`}
             >
               {item.content}
             </span>

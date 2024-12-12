@@ -42,7 +42,7 @@ const SelectedType = ({
       </main>
       <ButtonBar
         isShowReSelect
-        path="/type"
+        path="/chat"
         text="상담 시작하기"
         className="bg-black py-4 text-white"
       />

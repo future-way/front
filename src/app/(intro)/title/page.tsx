@@ -1,6 +1,7 @@
 import Button from '@/components/Button'
 import UserName from './username'
 import TItle from '@/components/TItle'
+import ButtonBar from '@/components/ButtonBar'
 
 const page = () => {
   // grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)]
@@ -14,12 +15,11 @@ const page = () => {
         ></TItle>
         <UserName />
       </main>
-      <div className="mb-8 px-5">
-        <Button
-          className="w-full rounded-lg bg-gray3 py-4 text-white"
-          text="다음으로"
-        />
-      </div>
+      <ButtonBar
+        path="/choice"
+        text="다음으로"
+        className="bg-gray3 py-4 text-white"
+      />
     </>
   )
 }
