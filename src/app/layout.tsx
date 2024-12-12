@@ -18,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta name="viewport" content="width=device-width, user-scalable=no" />
       <body className={`font-pretendardMedium antialiased`}>
         <Providers>
           <div className="m-auto min-w-[300px] max-w-[600px]">{children}</div>
