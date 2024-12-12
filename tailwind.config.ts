@@ -19,6 +19,7 @@ export default {
         gray3: '#D9DCE2',
         gray4: '#BEC5CF',
         gray5: '#F5F6F7',
+        gray6: '#F2F4F6',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },

@@ -1,4 +1,3 @@
-import Button from '@/components/Button'
 import Guide from '@/components/Guide'
 import TItle from '@/components/TItle'
 import ButtonBar from '@/components/ButtonBar'

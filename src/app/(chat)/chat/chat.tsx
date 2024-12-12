@@ -1,42 +1,44 @@
 'use client'
 
 import Button from '@/components/Button'
-import { useEffect, useState } from 'react'
+import Popup from '@/components/popup'
+import { useNameStore } from '@/store/store'
+import { checkUserOrApi } from '@/utils/utils'
+import { useRouter } from 'next/navigation'
+import { ChangeEvent, useEffect, useState } from 'react'
 
-// 메시지 타입 정의
-interface Message {
+export interface Message {
   text: string
-  sender: 'user' | 'api' // 'user' 또는 'api'
-  timestamp: string // 메시지가 보낸 시간
+  sender: 'user' | 'api'
+  timestamp: string
 }
 
-function checkUserOrApi(sender: Message['sender']) {
-  if (sender === 'user') {
-    return 'rounded-tl-[0.75rem] rounded-tr-[0.75rem] rounded-br-[0px] rounded-bl-[0.75rem]'
-  } else {
-    return 'rounded-tl-[0px] rounded-tr-[0.75rem] rounded-br-[0.75rem] rounded-bl-[0.75rem]'
-  }
+const welcomeMessage: Message = {
+  text: '안녕하세요! 채팅에 오신 것을 환영합니다.',
+  sender: 'api',
+  timestamp: new Date().toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  }),
 }
 
-const ChatComponent: React.FC = () => {
+const Chat = () => {
+  const { name } = useNameStore()
+  const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([]) // 메시지 상태
   const [input, setInput] = useState<string>('') // 입력 상태
   const [isLoading, setIsLoading] = useState<boolean>(false) // 로딩 상태
+  const [isShowBtn, setIsShowForCloseBtn] = useState({
+    close: false,
+    result: false,
+  })
+  const [isPrev, setPrev] = useState(false)
 
   // 첫 화면에 환영 메시지
   useEffect(() => {
-    const welcomeMessage: Message = {
-      text: '안녕하세요! 채팅에 오신 것을 환영합니다.',
-      sender: 'api',
-      timestamp: new Date().toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-      }),
-    }
     setMessages([welcomeMessage]) // 환영 메시지 추가
   }, [])
 
-  // 메시지 전송 함수
   const handleSendMessage = async () => {
     if (input.trim()) {
       // 유저 메시지 추가
@@ -83,16 +85,92 @@ const ChatComponent: React.FC = () => {
     }
   }
 
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value)
+  }
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendMessage()
+    }
+  }
+
+  const onCounselClose = () => {
+    setIsShowForCloseBtn((prev) => {
+      return { ...prev, close: true }
+    })
+  }
+
+  const onOpenChat = () => {
+    setIsShowForCloseBtn((prev) => {
+      return { ...prev, close: false }
+    })
+  }
+
+  const onShowIsCounselResultBtn = () => {
+    setIsShowForCloseBtn((prev) => {
+      return { result: true, close: true }
+    })
+
+    const userMessage: Message = {
+      text: '괜찮아, 종료해줘',
+      sender: 'user',
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    }
+    setMessages([...messages, userMessage])
+
+    const apiMessage: Message = {
+      text: `${name}님 오늘의 상담은 여기까지에요. 상담내용은 아래 ‘나만의 상담카드 보러가기' 버튼을 클릭하면 볼 수 있어요!`,
+      sender: 'api',
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    }
+
+    setMessages((prevMessages) => [...prevMessages, apiMessage])
+  }
+
+  const onMoveCounselPage = () => {
+    router.push('/result')
+  }
+
+  const onCancel = () => {
+    setPrev(false)
+  }
+
+  const onPrev = () => {
+    router.push('/choice')
+  }
+
   return (
     <>
+      {isPrev && (
+        <Popup
+          title1="이전으로 돌아가면"
+          title2="모든 상담 내용이 사라져요"
+          guide1="진로 성향 결과 화면으로 돌아갈까요?"
+          buttonName1="취소"
+          buttonName2="이전으로"
+          onclick1={onCancel}
+          onclick2={onPrev}
+        />
+      )}
       <header className="relative w-full">
         <Button
+          onclick={() => setPrev((prev) => !prev)}
           className="absolute inset-y-0 left-[10px] w-auto"
           text={<img src="/images/icon-arrow-back.png" alt="뒤로가기" />}
         />
-        <h1 className="py-3 text-center text-base text-gray1">내일 찾기</h1>
+        <h1 className="py-3 text-center font-pretendardSemiBold text-base text-gray1">
+          내일 찾기
+        </h1>
         <Button
-          className="absolute inset-y-0 right-[10px] w-auto text-black"
+          onclick={onCounselClose}
+          className="absolute inset-y-0 right-[10px] w-auto text-gray1"
           text="상담종료"
         />
       </header>
@@ -137,37 +215,74 @@ const ChatComponent: React.FC = () => {
                   )}
                 </p>
               </div>
-              {/* 메시지 아래에 시간 표시 */}
               <p className="mt-1 text-xxs text-gray1">{msg.timestamp}</p>
             </div>
           ))}
         </div>
 
-        <div className="relative px-3">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="메시지를 입력하기"
-            className="bg-gray5 mb-3 w-full rounded-3xl text-gray1"
-            style={{
-              padding: '10px',
-            }}
-          />
-          <button
-            onClick={handleSendMessage}
-            className="absolute right-3"
-            style={{
-              padding: '10px',
-              borderRadius: '20px',
-            }}
-          >
-            <img src="/images/img24.png" alt="입력하기 버튼" />
-          </button>
-        </div>
+        {isShowBtn.close ? (
+          <div className="flex justify-center gap-2">
+            {isShowBtn.result ? (
+              <Button
+                className="w-auto rounded-3xl bg-black px-5 py-2.5 text-slg text-white"
+                text="나만의 상담카드 보러가기 👀"
+                onclick={onMoveCounselPage}
+                isRounded
+              />
+            ) : (
+              <>
+                <Button
+                  className="w-auto rounded-3xl bg-black px-5 py-2.5 text-slg text-white"
+                  onclick={onShowIsCounselResultBtn}
+                  text="괜찮아, 종료해줘"
+                  isRounded
+                />
+                <Button
+                  onclick={onOpenChat}
+                  className="w-auto rounded-3xl bg-black px-5 py-2.5 text-slg text-white"
+                  text="상담 계속할게"
+                  isRounded
+                />
+              </>
+            )}
+          </div>
+        ) : (
+          <div className="relative px-3">
+            <input
+              type="text"
+              value={input}
+              onChange={onChangeInput}
+              onKeyDown={onKeyDown}
+              placeholder="메시지를 입력하기"
+              className="bg-gray5 mb-3 w-full rounded-3xl text-gray1"
+              style={{
+                padding: '10px',
+              }}
+            />
+            <button
+              onClick={handleSendMessage}
+              className="absolute right-3"
+              disabled={input.length === 0}
+              style={{
+                padding: '10px',
+                borderRadius: '20px',
+              }}
+            >
+              <span
+                className={`flex h-7 w-7 items-center rounded-full bg-${input.length === 0 ? 'gray2' : 'black'}`}
+              >
+                <img
+                  className="m-auto"
+                  src="/images/img24.png"
+                  alt="입력하기 버튼"
+                />
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </>
   )
 }
 
-export default ChatComponent
+export default Chat
