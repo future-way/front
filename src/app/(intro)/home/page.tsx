@@ -9,7 +9,7 @@ export default function Page() {
         <TItle
           text1="만나서 반가워요!"
           img="/images/img1.png"
-          className="text-l mb-6 mt-0"
+          className="mb-6 mt-0 text-l"
         />
         <Guide
           text1="저는 당신의 진로를 안내해줄 모모에요"

@@ -1,7 +1,6 @@
 'use client'
 
 import { yesOrNoStore } from '@/store/store'
-import { useState } from 'react'
 
 const btnCont = [
   {
@@ -30,7 +29,7 @@ const YesOrNo = () => {
           <button
             key={idx}
             onClick={() => onClickBtn(idx as 0 | 1)}
-            className={`${yesOrNo === idx ? 'bg-orange4 border bg-opacity-5' : 'bg-gray5'} border-orange4 w-full rounded-2xl py-9`}
+            className={`${yesOrNo === idx ? 'border bg-orange4 bg-opacity-5' : 'bg-gray5'} w-full rounded-2xl border-orange4 py-9`}
           >
             <div className="m-auto mb-3 w-[4.7rem]">
               <img src={`/images/img${item.img}.png`} alt={item.imgAlt} />

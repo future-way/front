@@ -5,57 +5,92 @@ import Card from './card'
 import Summary from './summary'
 import Loading from '@/components/loading/loading'
 import { useEffect, useState } from 'react'
-import { useNameStore } from '@/store/store'
+import { progressBarStore, useNameStore } from '@/store/store'
 import Popup from '@/components/popup'
 import { useRouter } from 'next/navigation'
-import { API_URL, resultType } from '@/lib/api'
-import axios, {
-  AxiosError,
-  AxiosProgressEvent,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from 'axios'
+import { API_URL } from '@/lib/api'
+import progressAxios from '@/lib/progressAxios'
+
+const hollandType = ['현실형', '탐구형', '예술형', '사회형', '진취형', '관습형']
 
 const ResultCont = () => {
   const { name, userId } = useNameStore()
   const router = useRouter()
-  const [progress, setProgress] = useState(0)
+
   const [loading, setLoading] = useState(true)
   const [isRestart, setRestart] = useState(false)
+  const [result, setResult] = useState<Array<string>>([])
+  const [advice, setAdvice] = useState<Array<string>>([])
+  const [way, setWay] = useState<Array<string>>([])
+  const [summary, setSummary] = useState('')
+  const { progressNum } = progressBarStore()
 
-  const postData = {
-    userId,
+  const data = {
+    userId: (userId as number) ?? 19,
   }
 
   const getData = async () => {
-    setLoading(true)
-
-    const config: AxiosRequestConfig = {
-      onDownloadProgress: (progressEvent: AxiosProgressEvent) => {
-        if (progressEvent.total) {
-          const percent = Math.floor(
-            (progressEvent.loaded / progressEvent.total) * 100,
-          )
-          setProgress(percent) // 진행 상황 업데이트
-        }
-      },
-    }
-
     try {
-      const response: AxiosResponse<resultType> = await axios.post(
+      const res = await progressAxios.post(
         `${API_URL}/api/gemini/summary`,
-        postData, // POST로 전송할 데이터
-        config, // 요청 설정
+        data,
       )
-      console.log(response.data) // API 응답
-    } catch (error: AxiosError | any) {
-      console.error('API 호출 오류:', error.message)
-    } finally {
-      setLoading(false) // 로딩 완료
+
+      const summary = res.data
+
+      if (summary) {
+        const userResult = summary.summary.replace(/\*/g, '').split(/\n\n|:/)
+        let obj = { title: '', cont: [] as Array<string> }
+        let filterResultToArray: Array<{
+          [key: string]: string | Array<string>
+        }> = []
+        userResult.forEach((item: string) => {
+          if (item.length !== 0) {
+            const isTitle =
+              item.includes('\n') ||
+              item.includes('홀랜드 유형') ||
+              item.includes('추천 진로') ||
+              item.includes('조언 및 계획') ||
+              item.includes('상담 결과 요약 내용')
+
+            if (isTitle && item.length > 0) {
+              console.log(obj)
+
+              filterResultToArray.push(obj)
+              obj = { title: '', cont: [] }
+              obj.title = item
+            } else {
+              const txt =
+                name + '님의 상황을 고려하여 몇 가지 진로를 추천해 드립니다.'
+              if (txt !== item) {
+                obj.cont.push(item.trim() as string)
+              }
+            }
+          }
+        })
+        setResult(userResult)
+
+        console.log(filterResultToArray)
+
+        filterResultToArray.forEach((item) => {
+          if (item['title'].includes('조언 및 계획')) {
+            setAdvice(item.cont as Array<string>)
+          } else if (item['title'].includes('추천 진로')) {
+            setWay(item.cont as Array<string>)
+          } else if (item['title'].includes('상담 결과 요약 내용')) {
+            setSummary(item.cont as string)
+          }
+        })
+
+        setLoading(false)
+      }
+    } catch (e) {
+      console.log(e)
     }
   }
 
   useEffect(() => {
+    setLoading(true)
     getData()
   }, [])
 
@@ -66,7 +101,6 @@ const ResultCont = () => {
       document.body.style.overflowY = ''
     }
 
-    // 컴포넌트가 언마운트될 때 원래 상태로 복원
     return () => {
       document.body.style.overflowY = ''
     }
@@ -84,7 +118,7 @@ const ResultCont = () => {
     <>
       {loading ? (
         <Loading
-          progress={progress}
+          progress={progressNum}
           title1={`${name}님을 위한`}
           title2="상담카드를 만들고 있어요"
           guide1={`오늘 상담이 ${name}님의`}
@@ -108,8 +142,13 @@ const ResultCont = () => {
               <h1 className="relative py-3 text-base text-white">상담카드</h1>
             </header>
             <div>
-              <Card />
-              <Summary />
+              <Card name={name} />
+              <Summary
+                name={name}
+                summary={summary}
+                advice={advice}
+                way={way}
+              />
               <div className="mb-8 px-5">
                 <Button
                   text="처음부터 다시하기"

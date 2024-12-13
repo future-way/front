@@ -41,3 +41,15 @@ export const yesOrNoStore = create<YesOrNo>((set) => ({
     set((state) => ({ yesOrNo }))
   },
 }))
+
+interface progressBar {
+  progressNum: number
+  setProgressBar: (progressNum: number) => void
+}
+
+export const progressBarStore = create<progressBar>((set) => ({
+  progressNum: 0,
+  setProgressBar: (progressNum) => {
+    set((state) => ({ progressNum }))
+  },
+}))

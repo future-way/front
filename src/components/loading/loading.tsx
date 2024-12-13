@@ -1,4 +1,5 @@
-import { useState } from 'react'
+'use client'
+
 import CircularProgressBar from './circularprogressbar'
 
 export interface loadingTextType {
@@ -26,7 +27,7 @@ const Loading = ({
           <CircularProgressBar
             sqSize={114}
             strokeWidth={9}
-            percentage={progress ?? 0}
+            percentage={progress as number}
             img="images/img2.png"
           />
 

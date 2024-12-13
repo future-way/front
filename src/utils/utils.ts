@@ -1,5 +1,3 @@
-import { Message } from '@/app/(chat)/chat/chat'
-
 export function isBtnActive(path: string, btnActive: boolean) {
   if (['/choice', '/disarray-type'].includes(path)) {
     return !btnActive

@@ -1,16 +1,46 @@
 'use client'
 
 import SelectedType, { selectedType } from './selectedtype'
-import LoadingType from './loading'
+import Loading from '@/components/loading/loading'
+import { useNameStore } from '@/store/store'
 import { useEffect, useState } from 'react'
 
 const TypeContent = ({ type }: { type: selectedType }) => {
+  const { name } = useNameStore()
   const [active, setActive] = useState(false)
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
-    setActive(true)
+    // setInterval을 하나만 실행되도록 수정
+    const interval = setInterval(() => {
+      setCount((old) => {
+        const newCount = old + 5
+        if (newCount > 100) {
+          clearInterval(interval)
+          setActive(true)
+        }
+        return newCount
+      })
+    }, 500)
+
+    return () => clearInterval(interval)
   }, [])
-  return <>{active ? <SelectedType {...type} /> : <LoadingType />}</>
+
+  return (
+    <>
+      {active ? (
+        <SelectedType {...type} />
+      ) : (
+        <Loading
+          title1={`${name}님의`}
+          title2="진로 성향을 분석중이에요!"
+          guide1="내일찾기만의 진로 성향 분석으로"
+          guide2="더욱 정확한 상담이 가능해요"
+          progress={count}
+        />
+      )}
+    </>
+  )
 }
 
 export default TypeContent

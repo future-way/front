@@ -44,20 +44,3 @@ export function useUserType(): UseMutationResult<
     },
   })
 }
-
-export function useUserResult(): UseMutationResult<
-  resultType,
-  AxiosError,
-  number
-> {
-  const queryClient = useQueryClient()
-  return useMutation<resultType, AxiosError, number>({
-    mutationFn: postForResult,
-    onSuccess: (data: resultType) => {
-      queryClient.setQueryData<resultType>(['resultType'], data)
-    },
-    onError: (error: AxiosError) => {
-      console.error(error)
-    },
-  })
-}

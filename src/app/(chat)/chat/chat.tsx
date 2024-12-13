@@ -75,7 +75,7 @@ const Chat = () => {
       const loadingMessage: Message = {
         questionMessage: '',
         sender: 'api',
-      } // 텍스트 대신 이미지
+      }
       setMessages((prevMessages) => [...prevMessages, loadingMessage])
 
       const getAnswer = await postForAnswer({
