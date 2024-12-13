@@ -6,10 +6,16 @@ export interface loadingTextType {
   title2: string
   guide1: string
   guide2: string
+  progress?: number
 }
 
-const Loading = ({ title1, title2, guide1, guide2 }: loadingTextType) => {
-  const [progress, setProgress] = useState(0)
+const Loading = ({
+  title1,
+  title2,
+  guide1,
+  guide2,
+  progress,
+}: loadingTextType) => {
   return (
     <div className="flex h-screen flex-col text-center">
       <header className="h-10">
@@ -20,7 +26,7 @@ const Loading = ({ title1, title2, guide1, guide2 }: loadingTextType) => {
           <CircularProgressBar
             sqSize={114}
             strokeWidth={9}
-            percentage={progress}
+            percentage={progress ?? 0}
             img="images/img2.png"
           />
 

@@ -2,19 +2,20 @@
 
 import Button from '@/components/Button'
 import Popup from '@/components/popup'
+import { postFirstQuestion, postForAnswer } from '@/lib/api'
 import { useNameStore } from '@/store/store'
-import { checkUserOrApi } from '@/utils/utils'
 import { useRouter } from 'next/navigation'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 export interface Message {
-  text: string
+  id?: number
+  questionMessage: string
   sender: 'user' | 'api'
-  timestamp: string
+  timestamp?: string
 }
 
-const welcomeMessage: Message = {
-  text: '안녕하세요! 채팅에 오신 것을 환영합니다.',
+let welcomeMessage: Message = {
+  questionMessage: '안녕하세요! 채팅에 오신 것을 환영합니다.',
   sender: 'api',
   timestamp: new Date().toLocaleTimeString([], {
     hour: '2-digit',
@@ -23,27 +24,44 @@ const welcomeMessage: Message = {
 }
 
 const Chat = () => {
-  const { name } = useNameStore()
+  const { name, userId } = useNameStore()
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([]) // 메시지 상태
   const [input, setInput] = useState<string>('') // 입력 상태
-  const [isLoading, setIsLoading] = useState<boolean>(false) // 로딩 상태
   const [isShowBtn, setIsShowForCloseBtn] = useState({
     close: false,
     result: false,
   })
   const [isPrev, setPrev] = useState(false)
 
-  // 첫 화면에 환영 메시지
   useEffect(() => {
-    setMessages([welcomeMessage]) // 환영 메시지 추가
+    async function getFirstAnswer() {
+      const firstQuestion = await postFirstQuestion(userId as number)
+      if (firstQuestion?.questionMessage) {
+        welcomeMessage.id = firstQuestion.aiConsultationHistoryId
+        welcomeMessage.questionMessage = firstQuestion.questionMessage
+        setMessages([welcomeMessage])
+      }
+    }
+    getFirstAnswer()
+  }, [])
+
+  const textRef = useRef<HTMLTextAreaElement>(null)
+
+  const handleResizeHeight = useCallback(() => {
+    if (textRef.current !== null) {
+      textRef.current.style.height = 'auto'
+      const height = textRef.current.scrollHeight
+      textRef.current.style.height = (height === 64 ? 56 : height) + 'px'
+    }
   }, [])
 
   const handleSendMessage = async () => {
     if (input.trim()) {
-      // 유저 메시지 추가
+      const id = messages[messages.length - 1].id
       const userMessage: Message = {
-        text: input,
+        id,
+        questionMessage: input,
         sender: 'user',
         timestamp: new Date().toLocaleTimeString([], {
           hour: '2-digit',
@@ -55,18 +73,21 @@ const Chat = () => {
 
       // API 응답 대기 중 로딩 메시지 추가
       const loadingMessage: Message = {
-        text: '',
+        questionMessage: '',
         sender: 'api',
-        timestamp: '',
       } // 텍스트 대신 이미지
       setMessages((prevMessages) => [...prevMessages, loadingMessage])
 
-      setIsLoading(true) // 로딩 시작
+      const getAnswer = await postForAnswer({
+        aiConsultationHistoryId: id as number,
+        userId: userId as number,
+        answer: input,
+      })
 
-      // API 호출 시뮬레이션 (setTimeout으로 지연된 응답을 모방)
-      setTimeout(async () => {
+      if (getAnswer.questionMessage) {
         const apiMessage: Message = {
-          text: 'API 응답 내용입니다.',
+          id: getAnswer.aiConsultationHistoryId,
+          questionMessage: getAnswer.questionMessage,
           sender: 'api',
           timestamp: new Date().toLocaleTimeString([], {
             hour: '2-digit',
@@ -76,20 +97,20 @@ const Chat = () => {
 
         // 로딩 메시지 제거하고 실제 API 메시지 추가
         setMessages((prevMessages) => {
-          const newMessages = prevMessages.filter((msg) => msg.text !== '') // 로딩 이미지 메시지 제거
+          const newMessages = prevMessages.filter(
+            (msg) => msg.questionMessage !== '',
+          ) // 로딩 이미지 메시지 제거
           return [...newMessages, apiMessage] // API 응답 메시지 추가
         })
-
-        setIsLoading(false) // 로딩 종료
-      }, 2000) // 2초 후 응답 시뮬레이션
+      }
     }
   }
 
-  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value)
   }
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       handleSendMessage()
     }
@@ -113,7 +134,7 @@ const Chat = () => {
     })
 
     const userMessage: Message = {
-      text: '괜찮아, 종료해줘',
+      questionMessage: '괜찮아, 종료해줘',
       sender: 'user',
       timestamp: new Date().toLocaleTimeString([], {
         hour: '2-digit',
@@ -123,7 +144,7 @@ const Chat = () => {
     setMessages([...messages, userMessage])
 
     const apiMessage: Message = {
-      text: `${name}님 오늘의 상담은 여기까지에요. 상담내용은 아래 ‘나만의 상담카드 보러가기' 버튼을 클릭하면 볼 수 있어요!`,
+      questionMessage: `${name}님 오늘의 상담은 여기까지에요. 상담내용은 아래 ‘나만의 상담카드 보러가기' 버튼을 클릭하면 볼 수 있어요!`,
       sender: 'api',
       timestamp: new Date().toLocaleTimeString([], {
         hour: '2-digit',
@@ -162,7 +183,7 @@ const Chat = () => {
       <header className="relative w-full">
         <Button
           onclick={() => setPrev((prev) => !prev)}
-          className="absolute inset-y-0 left-[10px] w-auto"
+          className="absolute inset-y-0 left-[10px] w-6"
           text={<img src="/images/icon-arrow-back.png" alt="뒤로가기" />}
         />
         <h1 className="py-3 text-center font-pretendardSemiBold text-base text-gray1">
@@ -177,11 +198,11 @@ const Chat = () => {
       <div className="m-auto flex h-screen max-w-[100%] flex-col">
         {/* 메시지 목록 표시 */}
         <div
+          className="mb-3"
           style={{
             padding: '10px',
             flexGrow: 1,
             overflowY: 'auto',
-            marginBottom: '10px',
           }}
         >
           {messages.map((msg, index) => (
@@ -192,26 +213,31 @@ const Chat = () => {
               {msg.sender === 'api' && (
                 <>
                   <div className="mb-1 inline-flex items-center gap-2">
-                    <img src="/images/img22.png" alt="" />
-                    <p className="text-m font-pretendardSemiBold text-black">
+                    <img
+                      className="h-auto w-10"
+                      src="/images/img22.png"
+                      alt=""
+                    />
+                    <p className="font-pretendardSemiBold text-m text-black">
                       모모
                     </p>
                   </div>
                 </>
               )}
               <div
-                className={`${msg.sender === 'user' ? 'bg-orange1' : 'bg-gray5'} ${checkUserOrApi(msg.sender)}`}
-                style={{
-                  padding: '8px 12px',
-                }}
+                className={`w-auto max-w-[90%] px-4 py-2.5 ${msg.sender === 'user' ? 'rounded-right bg-orange1' : 'rounded-left bg-gray5'} `}
               >
                 <p
-                  className={`${msg.sender === 'user' ? 'text-white' : 'text-black'}`}
+                  className={`whitespace-pre-wrap text-slg font-medium ${msg.sender === 'user' ? 'text-white' : 'text-black'}`}
                 >
-                  {msg.sender === 'api' && msg.text === '' ? (
-                    <img src="/images/img23.png" alt="loading" />
+                  {msg.sender === 'api' && msg.questionMessage === '' ? (
+                    <img
+                      className="w-12"
+                      src="/images/img23.png"
+                      alt="loading"
+                    />
                   ) : (
-                    msg.text
+                    msg.questionMessage
                   )}
                 </p>
               </div>
@@ -248,21 +274,20 @@ const Chat = () => {
           </div>
         ) : (
           <div className="relative px-3">
-            <input
-              type="text"
+            <textarea
               value={input}
               onChange={onChangeInput}
               onKeyDown={onKeyDown}
+              onInput={handleResizeHeight}
+              ref={textRef}
+              rows={1}
               placeholder="메시지를 입력하기"
-              className="bg-gray5 mb-3 w-full rounded-3xl text-gray1"
-              style={{
-                padding: '10px',
-              }}
-            />
+              className="mb-3 w-full rounded-3xl bg-gray5 p-5 pr-10 text-gray1"
+            ></textarea>
             <button
               onClick={handleSendMessage}
               className="absolute right-3"
-              disabled={input.length === 0}
+              disabled={input.trim().length === 0}
               style={{
                 padding: '10px',
                 borderRadius: '20px',
@@ -272,7 +297,7 @@ const Chat = () => {
                 className={`flex h-7 w-7 items-center rounded-full bg-${input.length === 0 ? 'gray2' : 'black'}`}
               >
                 <img
-                  className="m-auto"
+                  className="m-auto w-3"
                   src="/images/img24.png"
                   alt="입력하기 버튼"
                 />

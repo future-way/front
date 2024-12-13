@@ -13,12 +13,13 @@ const Button = ({
   isRounded = false,
 }: buttonType) => {
   const classNameArr = (className ?? '').split(' ')
-  const isWidthAuto = classNameArr.includes('w-auto')
+  const isWidth =
+    classNameArr.includes('w-auto') || classNameArr.includes('w-6')
   return (
     <>
       <button
         onClick={onclick}
-        className={`${isWidthAuto ? '' : 'w-full'} ${!isRounded && 'rounded-lg'} ${className}`}
+        className={`${isWidth ? '' : 'w-full'} ${!isRounded && 'rounded-lg'} ${className}`}
       >
         {text}
       </button>

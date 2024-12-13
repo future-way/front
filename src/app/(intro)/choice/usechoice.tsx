@@ -3,7 +3,7 @@
 import style from './usechoice.module.css'
 import { choiceNumStore } from '@/store/store'
 
-const steps = [
+export const steps = [
   '무슨일을 해야할지 모르겠어',
   '이 길이 맞는지 확신이 안서',
   '이 길로 가려면 뭘 해야하는지 잘 모르겠어',

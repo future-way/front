@@ -35,6 +35,10 @@ export default {
         slg: '1.0625rem',
         l: '1.625rem',
       },
+      borderRadius: {
+        left: '0px 1.375rem 1.375rem 1.375rem',
+        right: '1.375rem 0px 1.375rem 1.375rem',
+      },
     },
   },
   mode: 'jit',

@@ -8,17 +8,55 @@ import { useEffect, useState } from 'react'
 import { useNameStore } from '@/store/store'
 import Popup from '@/components/popup'
 import { useRouter } from 'next/navigation'
+import { API_URL, resultType } from '@/lib/api'
+import axios, {
+  AxiosError,
+  AxiosProgressEvent,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios'
 
 const ResultCont = () => {
-  const { name } = useNameStore()
+  const { name, userId } = useNameStore()
   const router = useRouter()
+  const [progress, setProgress] = useState(0)
   const [loading, setLoading] = useState(true)
   const [isRestart, setRestart] = useState(false)
 
+  const postData = {
+    userId,
+  }
+
+  const getData = async () => {
+    setLoading(true)
+
+    const config: AxiosRequestConfig = {
+      onDownloadProgress: (progressEvent: AxiosProgressEvent) => {
+        if (progressEvent.total) {
+          const percent = Math.floor(
+            (progressEvent.loaded / progressEvent.total) * 100,
+          )
+          setProgress(percent) // 진행 상황 업데이트
+        }
+      },
+    }
+
+    try {
+      const response: AxiosResponse<resultType> = await axios.post(
+        `${API_URL}/api/gemini/summary`,
+        postData, // POST로 전송할 데이터
+        config, // 요청 설정
+      )
+      console.log(response.data) // API 응답
+    } catch (error: AxiosError | any) {
+      console.error('API 호출 오류:', error.message)
+    } finally {
+      setLoading(false) // 로딩 완료
+    }
+  }
+
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 800)
+    getData()
   }, [])
 
   useEffect(() => {
@@ -46,6 +84,7 @@ const ResultCont = () => {
     <>
       {loading ? (
         <Loading
+          progress={progress}
           title1={`${name}님을 위한`}
           title2="상담카드를 만들고 있어요"
           guide1={`오늘 상담이 ${name}님의`}
