@@ -15,9 +15,11 @@ const TItle = ({
 }: titleType) => {
   return (
     <>
-      <div className={`${imgClassName}`}>
-        <img className="m-auto" src={img} alt="" />
-      </div>
+      {img && (
+        <div className={`${imgClassName}`}>
+          <img className="m-auto" src={img} alt="" />
+        </div>
+      )}
       <h2
         className={`mt-5 font-pretendardSemiBold text-2xl font-semibold text-black ${className}`}
       >

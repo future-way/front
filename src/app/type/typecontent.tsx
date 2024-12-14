@@ -14,7 +14,7 @@ const TypeContent = ({ type }: { type: selectedType }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((old) => {
-        const newCount = old + 5
+        const newCount = old + 10
         if (newCount > 100) {
           clearInterval(interval)
           setActive(true)

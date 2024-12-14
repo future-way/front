@@ -6,8 +6,8 @@ import Button from './Button'
 interface type {
   isShowBackBtn: boolean
   width: number
+  prevLink: string
   onClick?: () => {}
-  prevLink?: string
 }
 
 const Header = ({ width, isShowBackBtn, prevLink }: type) => {
@@ -15,7 +15,9 @@ const Header = ({ width, isShowBackBtn, prevLink }: type) => {
 
   const onBackPage = () => {
     if (prevLink) {
-      router.push(prevLink)
+      console.log('sdfsd1')
+
+      router.replace(prevLink)
     }
   }
   return (
