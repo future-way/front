@@ -41,10 +41,61 @@ html {
   .top-choice-text {
     top: calc(50% - 200px);
   }
-}
 
-@layer utilities {
   .marker-black::marker {
     color: #2e3033;
+  }
+
+  .bg-pos-size-auto {
+    background-position: 30px 24px;
+    background-size: 2px auto;
+  }
+
+  .bubble {
+    background-color: rgba(255, 118, 94, 0.05);
+    border-radius: 16px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 64px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 64px;
+    margin-left: 24px;
+    line-height: 64px;
+    text-align: left;
+  }
+
+  .text p {
+    margin: 0;
+  }
+
+  .height-chat {
+    height: calc(100vh - 48px);
+  }
+
+  @keyframes typing {
+    0%,
+    75%,
+    100% {
+      transform: translate(0, 0.25rem) scale(0.9);
+      opacity: 0.5;
+    }
+
+    25% {
+      transform: translate(0, -0.25rem) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-typing {
+    animation: typing 1.5s ease-in-out infinite;
   }
 }

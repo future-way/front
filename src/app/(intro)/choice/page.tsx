@@ -2,17 +2,13 @@ import Guide from '@/components/Guide'
 import TItle from '@/components/TItle'
 import UseChoice from './usechoice'
 import ButtonBar from '@/components/ButtonBar'
+import ChoiceTitle from './choicetitle'
 
 const page = () => {
   return (
     <>
       <main className="flex flex-1 flex-col items-center justify-center">
-        <TItle
-          text1="진로에 대해"
-          text2="어떤 진로 고민이 있나요?"
-          img="/images/img2.png"
-          className="mb-6 mt-0 font-black"
-        />
+        <ChoiceTitle></ChoiceTitle>
         <Guide
           text1="고민을 구체적으로 정해주시면"
           text2="더 정확하게 도와드릴 수 있어요"

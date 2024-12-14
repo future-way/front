@@ -35,6 +35,10 @@ const Chat = () => {
   const [isPrev, setPrev] = useState(false)
 
   useEffect(() => {
+    if (textRef.current !== null) {
+      textRef.current.style.height = 56 + 'px'
+    }
+
     async function getFirstAnswer() {
       const firstQuestion = await postFirstQuestion(userId as number)
       if (firstQuestion?.questionMessage) {
@@ -50,11 +54,16 @@ const Chat = () => {
 
   const handleResizeHeight = useCallback(() => {
     if (textRef.current !== null) {
-      textRef.current.style.height = 'auto'
+      if (input.trim().length === 0) {
+        textRef.current.style.height = '56px'
+        return
+      }
+
+      textRef.current.style.height = '0px'
       const height = textRef.current.scrollHeight
       textRef.current.style.height = (height === 64 ? 56 : height) + 'px'
     }
-  }, [])
+  }, [textRef, input])
 
   const handleSendMessage = async () => {
     if (input.trim()) {
@@ -195,7 +204,7 @@ const Chat = () => {
           text="상담종료"
         />
       </header>
-      <div className="m-auto flex h-screen max-w-[100%] flex-col">
+      <div className="height-chat m-auto flex max-w-[100%] flex-col">
         {/* 메시지 목록 표시 */}
         <div
           className="mb-3"
@@ -232,7 +241,7 @@ const Chat = () => {
                 >
                   {msg.sender === 'api' && msg.questionMessage === '' ? (
                     <img
-                      className="w-12"
+                      className="animate-typing w-12"
                       src="/images/img23.png"
                       alt="loading"
                     />
@@ -286,15 +295,11 @@ const Chat = () => {
             ></textarea>
             <button
               onClick={handleSendMessage}
-              className="absolute right-3"
+              className="absolute right-3 rounded-[1.25rem] p-[0.65rem]"
               disabled={input.trim().length === 0}
-              style={{
-                padding: '10px',
-                borderRadius: '20px',
-              }}
             >
               <span
-                className={`flex h-7 w-7 items-center rounded-full bg-${input.length === 0 ? 'gray2' : 'black'}`}
+                className={`flex h-7 w-7 items-center rounded-full bg-${input.trim().length === 0 ? 'gray2' : 'black'}`}
               >
                 <img
                   className="m-auto w-3"

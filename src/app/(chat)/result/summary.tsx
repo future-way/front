@@ -3,11 +3,13 @@ interface summaryType {
   way: Array<string>
   summary: string
   name: string
+  holland: Array<string>
 }
 
-const Summary = ({ name, advice, way, summary }: summaryType) => {
+const Summary = ({ name, advice, way, summary, holland }: summaryType) => {
   const filterWay = way.length > 1 && way[0].length > 30 ? way.slice(1) : way
-
+  const filterHolland =
+    holland.length > 1 && holland[0].length > 30 ? holland.slice(1) : holland
   return (
     <div className="mx-5 mb-4 mt-2 rounded-[1.25rem] bg-white">
       <div className="px-6 py-7">
@@ -22,30 +24,23 @@ const Summary = ({ name, advice, way, summary }: summaryType) => {
           <em className="mb-3 block text-slg not-italic text-black">
             태그 상세 분석
           </em>
-          <ul className="ml-4">
-            <li className="marker-black list-disc">
-              <em className="text-m not-italic text-black">탐구력</em>
-              <p className="my-3 text-m text-gray1">
-                끊임없이 학습하고 새로운 지식을 얻으려는 열정이 뛰어납니다. 특히
-                논리적 사고와 분석적인 접근이 필요한 분야에서 강점을 발휘할 수
-                있습니다.
-              </p>
-            </li>
-            <li className="marker-black list-disc">
-              <em className="text-m not-italic text-black">도전정신</em>
-              <p className="my-3 text-m text-gray1">
-                변화와 도전에 긍정적으로 반응하며, 어려움 속 에서도 창의적인
-                해결책을 찾아냅니다. 실패를 두려워하지 않고 이를 학습의 기회로
-                삼는 태도 가 돋보입니다.
-              </p>
-            </li>
-            <li className="marker-black list-disc">
-              <em className="text-m not-italic text-black">안정성 선호</em>
-              <p className="my-3 text-m text-gray1">
-                도전 속에서도 일정 수준의 안정감을 중요하게 생각하며, 계획적인
-                실행을 통해 신뢰를 쌓는 스 타일입니다.
-              </p>
-            </li>
+          <ul>
+            {filterHolland.map((item, idx) => {
+              if (!filterHolland[idx * 2]) {
+                return ''
+              }
+
+              return (
+                <li key={idx}>
+                  <em className="text-m not-italic text-black">
+                    {filterHolland[idx * 2]}
+                  </em>
+                  <p className="my-3 text-m text-gray1">
+                    {filterHolland[idx * 2 + 1]}
+                  </p>
+                </li>
+              )
+            })}
           </ul>
         </div>
         <hr className="bg-gray4" />
@@ -93,7 +88,7 @@ const Summary = ({ name, advice, way, summary }: summaryType) => {
                 return ''
               }
               return (
-                <li>
+                <li key={idx}>
                   <em className="text-m not-italic text-black">
                     {advice[idx * 2]}
                   </em>

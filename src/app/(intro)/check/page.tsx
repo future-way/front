@@ -11,13 +11,14 @@ const page = () => {
           text1="현재 관심있는 분야가 있나요"
           text2="있나요?"
           img="/images/img2.png"
-          className="mb-6 mt-0 font-black"
+          className="mb-3 mt-0 font-black"
+          imgClassName="w-[3.6rem]"
         />
         <Guide
           text1="아직 해당 분야에"
           text2=" 전문적인 지식이 없어도 괜찮아요."
         />
-        <YesOrNo></YesOrNo>
+        <YesOrNo />
       </main>
       <ButtonBar
         path="/disarray-type"

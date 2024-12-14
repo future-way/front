@@ -1,5 +1,6 @@
 'use client'
 
+import Header from '@/components/Header'
 import SelectedType, { selectedType } from './selectedtype'
 import Loading from '@/components/loading/loading'
 import { useNameStore } from '@/store/store'
@@ -11,7 +12,6 @@ const TypeContent = ({ type }: { type: selectedType }) => {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    // setInterval을 하나만 실행되도록 수정
     const interval = setInterval(() => {
       setCount((old) => {
         const newCount = old + 5
@@ -29,7 +29,10 @@ const TypeContent = ({ type }: { type: selectedType }) => {
   return (
     <>
       {active ? (
-        <SelectedType {...type} />
+        <div className="flex h-screen flex-col text-center">
+          <Header isShowBackBtn width={100} />
+          <SelectedType {...type} />
+        </div>
       ) : (
         <Loading
           title1={`${name}님의`}

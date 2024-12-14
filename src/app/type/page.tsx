@@ -48,10 +48,7 @@ const page = async ({ searchParams }: { searchParams: params }) => {
     types[id as 'one' | 'two' | 'three' | 'four']
   return (
     <>
-      <div className="flex h-screen flex-col text-center">
-        <Header isShowBackBtn width={100} />
-        <TypeContent type={seletedType}></TypeContent>
-      </div>
+      <TypeContent type={seletedType}></TypeContent>
     </>
   )
 }

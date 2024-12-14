@@ -3,12 +3,19 @@ interface titleType {
   text2?: string
   img: string
   className?: string
+  imgClassName?: string
 }
 
-const TItle = ({ text1, text2, img, className }: titleType) => {
+const TItle = ({
+  text1,
+  text2,
+  img,
+  className = '',
+  imgClassName = '',
+}: titleType) => {
   return (
     <>
-      <div>
+      <div className={`${imgClassName}`}>
         <img className="m-auto" src={img} alt="" />
       </div>
       <h2

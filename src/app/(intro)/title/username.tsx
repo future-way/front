@@ -8,20 +8,25 @@ const UserName = () => {
   const { name, setUserName } = useNameStore()
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value.slice(0, 10))
+    setUserName(
+      e.target.value
+        .replace(/[`~!@#$%^&*()_|+\-=?;:'"<>\{\}\[\]\\\/ ]/gim, '')
+        .replace(/\d+/g, '')
+        .slice(0, 10),
+    )
   }
 
   return (
-    <div className="mt-5 w-full px-9 text-left">
+    <div className="relative mt-8 w-full text-left">
       <Input
         value={name}
         onTextChange={onChange}
-        clasName="mb-2"
+        clasName="border-gray2 p-[0.95rem] px-5 placeholder-gray4"
         type="text"
         placeholder="내 이름은.."
       />
-      <p className="font-pretendardSemiBold text-gray1">
-        <span className="text-gray4 font-pretendardMedium">{name.length} </span>
+      <p className="absolute right-5 top-[0.88rem] font-pretendardSemiBold text-gray1">
+        <span className="font-pretendardMedium text-gray4">{name.length} </span>
         / 10
       </p>
     </div>

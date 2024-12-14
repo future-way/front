@@ -1,6 +1,5 @@
 'use client'
 
-import style from './usechoice.module.css'
 import { choiceNumStore } from '@/store/store'
 
 export const steps = [
@@ -21,15 +20,17 @@ const UseChoice = () => {
   return (
     <>
       <div className="mt-6 flex w-full flex-col justify-center px-5">
-        <div className={`w-full ${style.chat_container}`}>
+        <div className="bg-pos-size-auto w-full bg-[url('/images/line.png')] bg-no-repeat">
           {steps.map((step, idx) => {
             return (
               <button
                 onClick={() => onClickBtn(idx)}
                 key={idx}
-                className={`w-full ${num === idx ? style.bubble : style.text}`}
+                className={`w-full ${num === idx ? 'bubble' : 'text'}`}
               >
-                <span className={`${num === idx ? 'h-9 w-9' : style.circle}`}>
+                <span
+                  className={`${num === idx ? 'h-9 w-9' : 'h-4 w-4 rounded-full bg-gray5'}`}
+                >
                   {num === idx ? (
                     <img src={`/images/img${imgList[idx]}.png`} alt="" />
                   ) : (

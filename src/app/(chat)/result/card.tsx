@@ -1,8 +1,10 @@
 interface cardType {
   name: string
+  holland: string
 }
 
-const Card = ({ name }: cardType) => {
+const Card = ({ name, holland }: cardType) => {
+  const hollandType = holland.replace(/[{}]/g, '').split(',')
   return (
     <div className="mx-5 rounded-[1.25rem] bg-white py-8">
       <h2 className="text-2xl">
@@ -14,15 +16,16 @@ const Card = ({ name }: cardType) => {
       </div>
       <div className="my-6">
         <ul className="flex flex-wrap justify-center gap-2">
-          <li className="inline-block rounded-full bg-orange3 px-3.5 py-1.5 font-pretendardSemiBold text-m text-orange1">
-            진취적인 모험가
-          </li>
-          <li className="inline-block rounded-full bg-orange3 px-3.5 py-1.5 font-pretendardSemiBold text-m text-orange1">
-            탐구형
-          </li>
-          <li className="inline-block rounded-full bg-orange3 px-3.5 py-1.5 font-pretendardSemiBold text-m text-orange1">
-            노력형
-          </li>
+          {hollandType.map((item, idx) => {
+            return (
+              <li
+                key={idx}
+                className="inline-block rounded-full bg-orange3 px-3.5 py-1.5 font-pretendardSemiBold text-m text-orange1"
+              >
+                {item}
+              </li>
+            )
+          })}
         </ul>
       </div>
       {/* <div>

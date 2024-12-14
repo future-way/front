@@ -1,10 +1,8 @@
 import axios from 'axios'
 
 export const API_URL =
-  process.env.NEXT_PUBLIC_API_SEVER_URL ?? 'http://211.188.53.120:18080/future'
-
-// 임시 데이터 타입 지정 -  react query 사용을 위함임
-// 나중에 실제로 데이터 지정을 위해서 mock 타입임
+  process.env.NEXT_PUBLIC_API_SEVER_URL ??
+  'https://api.find-your-day.duckdns.org/future'
 
 export interface useType {
   userId: number

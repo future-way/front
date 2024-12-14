@@ -19,14 +19,15 @@ const ResultCont = () => {
 
   const [loading, setLoading] = useState(true)
   const [isRestart, setRestart] = useState(false)
-  const [result, setResult] = useState<Array<string>>([])
   const [advice, setAdvice] = useState<Array<string>>([])
   const [way, setWay] = useState<Array<string>>([])
+  const [holland, setHolland] = useState('')
+  const [hollandDetail, setHollandDetail] = useState<Array<string>>([])
   const [summary, setSummary] = useState('')
   const { progressNum } = progressBarStore()
 
   const data = {
-    userId: (userId as number) ?? 19,
+    userId: (userId as number) ?? 56,
   }
 
   const getData = async () => {
@@ -39,6 +40,11 @@ const ResultCont = () => {
       const summary = res.data
 
       if (summary) {
+        const hollands = summary.summary.match(/\{[^}]*\}/)
+
+        if (hollands) {
+          setHolland(hollands[0])
+        }
         const userResult = summary.summary.replace(/\*/g, '').split(/\n\n|:/)
         let obj = { title: '', cont: [] as Array<string> }
         let filterResultToArray: Array<{
@@ -48,7 +54,7 @@ const ResultCont = () => {
           if (item.length !== 0) {
             const isTitle =
               item.includes('\n') ||
-              item.includes('홀랜드 유형') ||
+              item.includes('홀랜드 유형 3개') ||
               item.includes('추천 진로') ||
               item.includes('조언 및 계획') ||
               item.includes('상담 결과 요약 내용')
@@ -60,15 +66,13 @@ const ResultCont = () => {
               obj = { title: '', cont: [] }
               obj.title = item
             } else {
-              const txt =
-                name + '님의 상황을 고려하여 몇 가지 진로를 추천해 드립니다.'
-              if (txt !== item) {
+              const txt = '다음과 같은 진로를 추천합니다.'
+              if (!item.includes(txt)) {
                 obj.cont.push(item.trim() as string)
               }
             }
           }
         })
-        setResult(userResult)
 
         console.log(filterResultToArray)
 
@@ -79,6 +83,15 @@ const ResultCont = () => {
             setWay(item.cont as Array<string>)
           } else if (item['title'].includes('상담 결과 요약 내용')) {
             setSummary(item.cont as string)
+          } else if (item['title'].includes('홀랜드 유형 3개')) {
+            setHollandDetail(item.cont as Array<string>)
+
+            if (hollands.length === 0) {
+              const filteredHolland = (item.cont as string[]).filter((item) =>
+                hollandType.filter((item2) => item.includes(item2)),
+              )
+              setHolland(filteredHolland.join())
+            }
           }
         })
 
@@ -106,12 +119,12 @@ const ResultCont = () => {
     }
   }, [isRestart])
 
-  const onCancel = () => {
+  const onCancel: () => void = () => {
     setRestart(false)
   }
 
   const onReStart = () => {
-    router.push('/choice')
+    router.push('/title')
   }
 
   return (
@@ -142,11 +155,12 @@ const ResultCont = () => {
               <h1 className="relative py-3 text-base text-white">상담카드</h1>
             </header>
             <div>
-              <Card name={name} />
+              <Card holland={holland} name={name} />
               <Summary
                 name={name}
                 summary={summary}
                 advice={advice}
+                holland={hollandDetail}
                 way={way}
               />
               <div className="mb-8 px-5">
