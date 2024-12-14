@@ -8,8 +8,14 @@ interface summaryType {
 
 const Summary = ({ name, advice, way, summary, holland }: summaryType) => {
   const filterWay = way.length > 1 && way[0].length > 30 ? way.slice(1) : way
+  const filterAdvice =
+    advice.length > 1 && advice[0].length > 30 ? advice.slice(1) : advice
   const filterHolland =
     holland.length > 1 && holland[0].length > 30 ? holland.slice(1) : holland
+
+  console.log(filterWay)
+  console.log(filterHolland)
+
   return (
     <div className="mx-5 mb-4 mt-2 rounded-[1.25rem] bg-white">
       <div className="px-6 py-7">
@@ -83,17 +89,17 @@ const Summary = ({ name, advice, way, summary, holland }: summaryType) => {
           </em>
 
           <ul>
-            {advice.map((item, idx) => {
+            {filterAdvice.map((item, idx) => {
               if (!advice[idx * 2]) {
                 return ''
               }
               return (
                 <li key={idx}>
                   <em className="text-m not-italic text-black">
-                    {advice[idx * 2]}
+                    {filterAdvice[idx * 2]}
                   </em>
                   <p className="my-3 text-m text-gray1">
-                    {advice[idx * 2 + 1]}
+                    {filterAdvice[idx * 2 + 1]}
                   </p>
                 </li>
               )

@@ -93,6 +93,7 @@ export interface resultType {
   userId: number
   summary: string
   userType: string
+  hollandTypes: Array<string>
   createdDate: string
 }
 

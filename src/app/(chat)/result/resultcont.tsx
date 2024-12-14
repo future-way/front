@@ -27,14 +27,14 @@ const ResultCont = () => {
   const [isRestart, setRestart] = useState(false)
   const [advice, setAdvice] = useState<Array<string>>([])
   const [way, setWay] = useState<Array<string>>([])
-  const [holland, setHolland] = useState('')
+  const [holland, setHolland] = useState<Array<string>>([])
   const [hollandDetail, setHollandDetail] = useState<Array<string>>([])
   const [summary, setSummary] = useState('')
   const [userImgType, setUserImgType] = useState(18)
   const { progressNum } = progressBarStore()
 
   const data = {
-    userId: (userId as number) ?? 56,
+    userId: (userId as number) ?? 125,
   }
 
   const getData = async () => {
@@ -47,25 +47,23 @@ const ResultCont = () => {
       const resultSummary: resultType = res.data
 
       if (resultSummary) {
-        const { userType, summary } = resultSummary
-        const hollands = summary.match(/\{[^}]*\}/)
+        const { userType, summary, hollandTypes } = resultSummary
 
         if (userType) {
           setUserImgType(imgType[userType])
         }
 
-        if (hollands) {
-          setHolland(hollands[0])
+        if (hollandTypes) {
+          setHolland(hollandTypes)
         }
-        const userResult = summary.replace(/\*/g, '').split(/\n\n|:/)
+        const userResult = summary.replace(/\*/g, '').split(/\n{2,}|:/)
         let obj = { title: '', cont: [] as Array<string> }
         let filterResultToArray: Array<{
           [key: string]: string | Array<string>
         }> = []
-        userResult.forEach((item: string) => {
+        userResult.forEach((item: string, idx) => {
           if (item.length !== 0) {
             const isTitle =
-              item.includes('\n') ||
               item.includes('홀랜드 유형 3개') ||
               item.includes('추천 진로') ||
               item.includes('조언 및 계획') ||
@@ -77,8 +75,13 @@ const ResultCont = () => {
               obj.title = item
             } else {
               const txt = '다음과 같은 진로를 추천합니다.'
+
               if (!item.includes(txt)) {
                 obj.cont.push(item.trim() as string)
+              }
+
+              if (userResult.length - 1 === idx && obj.title !== '') {
+                filterResultToArray.push(obj)
               }
             }
           }
@@ -93,13 +96,6 @@ const ResultCont = () => {
             setSummary(item.cont as string)
           } else if (item['title'].includes('홀랜드 유형 3개')) {
             setHollandDetail(item.cont as Array<string>)
-
-            if (hollands === null) {
-              const filteredHolland = (item.cont as string[]).filter((item) =>
-                hollandType.filter((item2) => item.includes(item2)),
-              )
-              setHolland(filteredHolland.join())
-            }
           }
         })
 

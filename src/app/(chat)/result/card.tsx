@@ -1,11 +1,10 @@
 interface cardType {
   name: string
-  holland: string
+  holland: Array<string>
   userImgType: number
 }
 
-const Card = ({ name, holland, userImgType }: cardType) => {
-  const hollandType = holland.replace(/[{}]/g, '').split(',')
+const Card = ({ name, holland: holland, userImgType }: cardType) => {
   return (
     <div className="mx-5 rounded-[1.25rem] bg-white py-8">
       <h2 className="text-2xl">
@@ -17,7 +16,7 @@ const Card = ({ name, holland, userImgType }: cardType) => {
       </div>
       <div className="my-6">
         <ul className="flex flex-wrap justify-center gap-2">
-          {hollandType.map((item, idx) => {
+          {holland.map((item, idx) => {
             return (
               <li
                 key={idx}
