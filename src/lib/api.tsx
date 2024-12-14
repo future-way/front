@@ -92,6 +92,7 @@ export const postForAnswer = async (
 export interface resultType {
   userId: number
   summary: string
+  recommend: string
   userType: string
   hollandTypes: Array<string>
   createdDate: string

@@ -47,7 +47,7 @@ const ResultCont = () => {
       const resultSummary: resultType = res.data
 
       if (resultSummary) {
-        const { userType, summary, hollandTypes } = resultSummary
+        const { userType, summary, hollandTypes, recommend } = resultSummary
 
         if (userType) {
           setUserImgType(imgType[userType])
@@ -56,18 +56,39 @@ const ResultCont = () => {
         if (hollandTypes) {
           setHolland(hollandTypes)
         }
-        const userResult = summary.replace(/\*/g, '').split(/\n{2,}|:/)
+        const userSummary = summary.replace(/\*/g, '').split(/\n{2,}|:/)
+        const useRecommend = recommend.replace(/\*/g, '').split(/\n{2,}|:/)
         let obj = { title: '', cont: [] as Array<string> }
         let filterResultToArray: Array<{
           [key: string]: string | Array<string>
         }> = []
-        userResult.forEach((item: string, idx) => {
+
+        userSummary.forEach((item: string, idx) => {
           if (item.length !== 0) {
             const isTitle =
               item.includes('홀랜드 유형 3개') ||
-              item.includes('추천 진로') ||
-              item.includes('조언 및 계획') ||
               item.includes('상담 결과 요약 내용')
+
+            if (isTitle && item.length > 0) {
+              filterResultToArray.push(obj)
+              obj = { title: '', cont: [] }
+              obj.title = item
+            } else {
+              obj.cont.push(item.trim() as string)
+
+              if (userSummary.length - 1 === idx && obj.title !== '') {
+                filterResultToArray.push(obj)
+              }
+            }
+          }
+        })
+
+        obj = { title: '', cont: [] }
+
+        useRecommend.forEach((item: string, idx) => {
+          if (item.length !== 0) {
+            const isTitle =
+              item.includes('추천 진로') || item.includes('조언 및 계획')
 
             if (isTitle && item.length > 0) {
               filterResultToArray.push(obj)
@@ -80,7 +101,7 @@ const ResultCont = () => {
                 obj.cont.push(item.trim() as string)
               }
 
-              if (userResult.length - 1 === idx && obj.title !== '') {
+              if (useRecommend.length - 1 === idx && obj.title !== '') {
                 filterResultToArray.push(obj)
               }
             }

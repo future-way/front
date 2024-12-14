@@ -31,7 +31,7 @@ const SelectedType = ({
               text1={title1}
               text2={title2}
               img=""
-              className="color-white mb-6 text-l font-bold text-white"
+              className="color-white mb-6 !font-pretendardBold text-l font-bold text-white"
             />
             <Guide
               text1={guide1}

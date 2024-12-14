@@ -126,7 +126,7 @@ const ButtonBar = ({
         <button
           onClick={onClickNextPage}
           disabled={btnActive}
-          className={`w-full rounded-2xl ${isBtnActive(path, btnActive) ? 'bg-black py-4 text-white' : className}`}
+          className={`w-full rounded-2xl font-pretendardBold ${isBtnActive(path, btnActive) ? 'bg-black py-4 text-white' : className}`}
         >
           {text}
         </button>

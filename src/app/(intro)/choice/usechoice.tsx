@@ -38,7 +38,7 @@ const UseChoice = () => {
                   )}
                 </span>
                 <p
-                  className={`w-full rounded-lg ${num === idx ? 'text-orange1' : 'text-gray1'}`}
+                  className={`w-full rounded-lg ${num === idx ? 'text-orange1' : 'pl-2 text-gray1'}`}
                 >
                   {step}
                 </p>
