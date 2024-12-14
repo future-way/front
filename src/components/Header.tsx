@@ -1,8 +1,8 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import Button from './Button'
-
 interface type {
   isShowBackBtn: boolean
   width: number
@@ -13,11 +13,15 @@ interface type {
 const Header = ({ width, isShowBackBtn, prevLink }: type) => {
   const router = useRouter()
 
+  useEffect(() => {
+    if (prevLink) {
+      router.prefetch(prevLink)
+    }
+  }, [router])
+
   const onBackPage = () => {
     if (prevLink) {
-      console.log('sdfsd1')
-
-      router.replace(prevLink)
+      router.push(prevLink)
     }
   }
   return (

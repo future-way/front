@@ -1,5 +1,4 @@
 import Guide from '@/components/Guide'
-import TItle from '@/components/TItle'
 import UseChoice from './usechoice'
 import ButtonBar from '@/components/ButtonBar'
 import ChoiceTitle from './choicetitle'

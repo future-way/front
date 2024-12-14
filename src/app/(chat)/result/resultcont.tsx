@@ -94,7 +94,7 @@ const ResultCont = () => {
           } else if (item['title'].includes('홀랜드 유형 3개')) {
             setHollandDetail(item.cont as Array<string>)
 
-            if ((hollands as string[]).length === 0) {
+            if (hollands === null) {
               const filteredHolland = (item.cont as string[]).filter((item) =>
                 hollandType.filter((item2) => item.includes(item2)),
               )
