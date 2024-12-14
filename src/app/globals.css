@@ -36,7 +36,13 @@ html {
   touch-action: manipulation;
 }
 
-/* styles.css */
+@supports (-webkit-touch-callout: none) {
+  html,
+  body {
+    height: -webkit-fill-available;
+  }
+}
+
 @layer utilities {
   .top-choice-text {
     top: calc(50% - 200px);
