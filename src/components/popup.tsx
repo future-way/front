@@ -28,7 +28,7 @@ const Popup = ({
           {title1}
           <span className="block">{title2}</span>
         </h3>
-        <p className="my-3 text-center text-slg text-gray1">
+        <p className="mb-6 mt-3 text-center text-slg text-gray1">
           {guide1}
           <span>{guide2}</span>
         </p>

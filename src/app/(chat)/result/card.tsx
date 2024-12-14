@@ -11,10 +11,10 @@ const Card = ({ name, holland: holland, userImgType }: cardType) => {
         <span className="text-orange1">{name}</span>님 상담카드
       </h2>
       <p className="text-m text-gray1">{new Date().toLocaleDateString()}</p>
-      <div>
+      <div className="m-auto w-60">
         <img className="m-auto" src={`/images/img${userImgType}.png`} alt="" />
       </div>
-      <div className="my-6">
+      <div className="mt-[2.2rem]">
         <ul className="flex flex-wrap justify-center gap-2">
           {holland.map((item, idx) => {
             return (
@@ -22,7 +22,7 @@ const Card = ({ name, holland: holland, userImgType }: cardType) => {
                 key={idx}
                 className="inline-block rounded-full bg-orange3 px-3.5 py-1.5 font-pretendardSemiBold text-m text-orange1"
               >
-                {item}
+                {item.replace(/[a-zA-Z()]/g, '')}
               </li>
             )
           })}

@@ -5,7 +5,12 @@ import Card from './card'
 import Summary from './summary'
 import Loading from '@/components/loading/loading'
 import { useEffect, useState } from 'react'
-import { progressBarStore, useNameStore } from '@/store/store'
+import {
+  choiceNumStore,
+  progressBarStore,
+  useNameStore,
+  yesOrNoStore,
+} from '@/store/store'
 import Popup from '@/components/popup'
 import { useRouter } from 'next/navigation'
 import { API_URL, resultType } from '@/lib/api'
@@ -16,12 +21,14 @@ const imgType: { [key: string]: number } = {
   '혼란형-불확신': 20,
   '혼란형-확신': 18,
   망설임형: 19,
-  막막형: 5,
+  막막형: 25,
 }
 
 const ResultCont = () => {
-  const { name, userId } = useNameStore()
+  const { name, userId, setUserName, resetUserId } = useNameStore()
+  const { setChoiceNum } = choiceNumStore()
   const router = useRouter()
+  const { setYesOrNo } = yesOrNoStore()
 
   const [loading, setLoading] = useState(true)
   const [isRestart, setRestart] = useState(false)
@@ -56,25 +63,26 @@ const ResultCont = () => {
         if (hollandTypes) {
           setHolland(hollandTypes)
         }
-        const userSummary = summary.replace(/\*/g, '').split(/\n{2,}|:/)
-        const useRecommend = recommend.replace(/\*/g, '').split(/\n{2,}|:/)
+        const userSummary = summary.split(/\n{2,}|\:\*\*/)
+        const useRecommend = recommend.split(/\n{2,}|\:\*\*/)
         let obj = { title: '', cont: [] as Array<string> }
         let filterResultToArray: Array<{
           [key: string]: string | Array<string>
         }> = []
 
         userSummary.forEach((item: string, idx) => {
-          if (item.length !== 0) {
+          const txt = item.replace(/\*/g, '')
+          if (txt.length !== 0) {
             const isTitle =
-              item.includes('홀랜드 유형 3개') ||
-              item.includes('상담 결과 요약 내용')
+              txt.includes('홀랜드 유형 3개') ||
+              txt.includes('상담 결과 요약 내용')
 
-            if (isTitle && item.length > 0) {
+            if (isTitle && txt.length > 0) {
               filterResultToArray.push(obj)
               obj = { title: '', cont: [] }
-              obj.title = item
+              obj.title = txt
             } else {
-              obj.cont.push(item.trim() as string)
+              obj.cont.push(txt.trim() as string)
 
               if (userSummary.length - 1 === idx && obj.title !== '') {
                 filterResultToArray.push(obj)
@@ -85,20 +93,25 @@ const ResultCont = () => {
 
         obj = { title: '', cont: [] }
 
-        useRecommend.forEach((item: string, idx) => {
-          if (item.length !== 0) {
-            const isTitle =
-              item.includes('추천 진로') || item.includes('조언 및 계획')
+        console.log('useRecommend')
 
-            if (isTitle && item.length > 0) {
+        console.log(useRecommend)
+
+        useRecommend.forEach((item: string, idx) => {
+          const txt = item.replace(/\*/g, '')
+          if (txt.length !== 0) {
+            const isTitle =
+              txt.includes('추천 진로') || txt.includes('조언 및 계획')
+
+            if (isTitle && txt.length > 0) {
               filterResultToArray.push(obj)
               obj = { title: '', cont: [] }
-              obj.title = item
+              obj.title = txt
             } else {
-              const txt = '다음과 같은 진로를 추천합니다.'
+              const recomm = '다음과 같은 진로를 추천합니다.'
 
-              if (!item.includes(txt)) {
-                obj.cont.push(item.trim() as string)
+              if (!txt.includes(recomm)) {
+                obj.cont.push(txt.trim() as string)
               }
 
               if (useRecommend.length - 1 === idx && obj.title !== '') {
@@ -150,6 +163,10 @@ const ResultCont = () => {
 
   const onReStart = () => {
     router.push('/home')
+    setUserName('')
+    resetUserId()
+    setChoiceNum(0)
+    setYesOrNo(-1)
   }
 
   return (
@@ -192,7 +209,7 @@ const ResultCont = () => {
                 <Button
                   text="처음부터 다시하기"
                   onclick={() => setRestart((prev) => !prev)}
-                  className="bg-orange1 py-4 text-white"
+                  className="!rounded-2xl bg-orange1 py-4 text-white"
                 />
               </div>
             </div>
