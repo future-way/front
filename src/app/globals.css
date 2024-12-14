@@ -112,3 +112,7 @@ html {
     rgb(255, 118, 94, 0.25)
   );
 }
+
+.bg-home {
+  background: linear-gradient(180deg, #fff 49.23%, #ffedea 110.78%);
+}
