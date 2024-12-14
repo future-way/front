@@ -30,7 +30,7 @@ const TypeContent = ({ type }: { type: selectedType }) => {
     <>
       {active ? (
         <div className="flex h-screen flex-col text-center">
-          <Header isShowBackBtn width={100} />
+          <Header prevLink="/choice" isShowBackBtn width={100} />
           <SelectedType {...type} />
         </div>
       ) : (

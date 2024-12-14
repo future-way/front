@@ -92,6 +92,7 @@ export const postForAnswer = async (
 export interface resultType {
   userId: number
   summary: string
+  userType: string
   createdDate: string
 }
 

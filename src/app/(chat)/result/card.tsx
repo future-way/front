@@ -1,9 +1,10 @@
 interface cardType {
   name: string
   holland: string
+  userImgType: number
 }
 
-const Card = ({ name, holland }: cardType) => {
+const Card = ({ name, holland, userImgType }: cardType) => {
   const hollandType = holland.replace(/[{}]/g, '').split(',')
   return (
     <div className="mx-5 rounded-[1.25rem] bg-white py-8">
@@ -12,7 +13,7 @@ const Card = ({ name, holland }: cardType) => {
       </h2>
       <p className="text-m text-gray1">{new Date().toLocaleDateString()}</p>
       <div>
-        <img className="m-auto" src="/images/img18.png" alt="" />
+        <img className="m-auto" src={`/images/img${userImgType}.png`} alt="" />
       </div>
       <div className="my-6">
         <ul className="flex flex-wrap justify-center gap-2">

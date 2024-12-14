@@ -8,10 +8,16 @@ import { useEffect, useState } from 'react'
 import { progressBarStore, useNameStore } from '@/store/store'
 import Popup from '@/components/popup'
 import { useRouter } from 'next/navigation'
-import { API_URL } from '@/lib/api'
+import { API_URL, resultType } from '@/lib/api'
 import progressAxios from '@/lib/progressAxios'
 
 const hollandType = ['현실형', '탐구형', '예술형', '사회형', '진취형', '관습형']
+const imgType: { [key: string]: number } = {
+  '혼란형-불확신': 20,
+  '혼란형-확신': 18,
+  망설임형: 19,
+  막막형: 5,
+}
 
 const ResultCont = () => {
   const { name, userId } = useNameStore()
@@ -24,6 +30,7 @@ const ResultCont = () => {
   const [holland, setHolland] = useState('')
   const [hollandDetail, setHollandDetail] = useState<Array<string>>([])
   const [summary, setSummary] = useState('')
+  const [userImgType, setUserImgType] = useState(18)
   const { progressNum } = progressBarStore()
 
   const data = {
@@ -37,15 +44,20 @@ const ResultCont = () => {
         data,
       )
 
-      const summary = res.data
+      const resultSummary: resultType = res.data
 
-      if (summary) {
-        const hollands = summary.summary.match(/\{[^}]*\}/)
+      if (resultSummary) {
+        const { userType, summary } = resultSummary
+        const hollands = summary.match(/\{[^}]*\}/)
+
+        if (userType) {
+          setUserImgType(imgType[userType])
+        }
 
         if (hollands) {
           setHolland(hollands[0])
         }
-        const userResult = summary.summary.replace(/\*/g, '').split(/\n\n|:/)
+        const userResult = summary.replace(/\*/g, '').split(/\n\n|:/)
         let obj = { title: '', cont: [] as Array<string> }
         let filterResultToArray: Array<{
           [key: string]: string | Array<string>
@@ -60,8 +72,6 @@ const ResultCont = () => {
               item.includes('상담 결과 요약 내용')
 
             if (isTitle && item.length > 0) {
-              console.log(obj)
-
               filterResultToArray.push(obj)
               obj = { title: '', cont: [] }
               obj.title = item
@@ -74,8 +84,6 @@ const ResultCont = () => {
           }
         })
 
-        console.log(filterResultToArray)
-
         filterResultToArray.forEach((item) => {
           if (item['title'].includes('조언 및 계획')) {
             setAdvice(item.cont as Array<string>)
@@ -86,7 +94,7 @@ const ResultCont = () => {
           } else if (item['title'].includes('홀랜드 유형 3개')) {
             setHollandDetail(item.cont as Array<string>)
 
-            if (hollands.length === 0) {
+            if ((hollands as string[]).length === 0) {
               const filteredHolland = (item.cont as string[]).filter((item) =>
                 hollandType.filter((item2) => item.includes(item2)),
               )
@@ -124,7 +132,7 @@ const ResultCont = () => {
   }
 
   const onReStart = () => {
-    router.push('/title')
+    router.push('/home')
   }
 
   return (
@@ -155,7 +163,7 @@ const ResultCont = () => {
               <h1 className="relative py-3 text-base text-white">상담카드</h1>
             </header>
             <div>
-              <Card holland={holland} name={name} />
+              <Card userImgType={userImgType} holland={holland} name={name} />
               <Summary
                 name={name}
                 summary={summary}
