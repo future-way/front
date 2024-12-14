@@ -84,7 +84,7 @@ html {
   }
 
   .height-chat {
-    height: calc(100vh - 48px);
+    height: calc(100dvh - 48px);
   }
 
   @keyframes typing {
