@@ -11,7 +11,7 @@ const Logo = () => {
     }, 800)
   }, [])
   return (
-    <div className="flex h-screen flex-col justify-center">
+    <div className="flex h-svh flex-col justify-center">
       <div className="m-auto h-auto w-[175px]">
         <img className="w-full" src="/images/img10.png" alt="내일찾기" />
       </div>

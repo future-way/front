@@ -3,7 +3,7 @@ import Header from '@/components/Header'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-screen flex-col text-center">
+    <div className="fex-col flex h-svh text-center">
       <Header prevLink="" isShowBackBtn={false} width={25} />
       {children}
     </div>
