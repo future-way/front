@@ -18,7 +18,7 @@ const Loading = ({
   progress,
 }: loadingTextType) => {
   return (
-    <div className="100dvh flex flex-col text-center">
+    <div className="flex h-dvh flex-col text-center">
       <header className="h-10">
         <h1 className="text-base leading-10 text-gray1">내일찾기</h1>
       </header>
