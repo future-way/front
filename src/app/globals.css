@@ -118,6 +118,7 @@ html {
   .desktop_width {
     width: 390px;
     max-width: 390px;
+    background-color: #fff;
     transform: translateX(50%);
   }
 
