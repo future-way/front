@@ -1,11 +1,11 @@
 'use client'
 
 import { steps } from '@/app/(intro)/choice/usechoice'
-import { postUserName, useType } from '@/lib/api'
-import { usePostUser, userKey, useUserType } from '@/lib/useQuery'
+import { useType } from '@/lib/api'
+import { usePostUser, useUserType } from '@/lib/useQuery'
 import { choiceNumStore, useNameStore, yesOrNoStore } from '@/store/store'
 import { isBtnActive, selectTypeOrCheckPage } from '@/utils/utils'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -95,7 +95,9 @@ const ButtonBar = ({
             : `현재관심있는분야가있나요?${yesOrNo === 0 ? '네,있어요' : '아니요,없어요'}`,
         userType: checkUserType(num, yesOrNo),
       })
-      router.push(path)
+      setTimeout(() => {
+        router.push(path)
+      }, 150)
     } else {
       router.push(path)
     }

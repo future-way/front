@@ -41,7 +41,7 @@ const ResultCont = () => {
   const { progressNum } = progressBarStore()
 
   const data = {
-    userId: (userId as number) ?? 125,
+    userId: userId as number,
   }
 
   const getData = async () => {
@@ -93,10 +93,6 @@ const ResultCont = () => {
 
         obj = { title: '', cont: [] }
 
-        console.log('useRecommend')
-
-        console.log(useRecommend)
-
         useRecommend.forEach((item: string, idx) => {
           const txt = item.replace(/\*/g, '')
           if (txt.length !== 0) {
@@ -143,6 +139,7 @@ const ResultCont = () => {
   useEffect(() => {
     setLoading(true)
     getData()
+    sessionStorage.removeItem('hasRefreshed')
   }, [])
 
   useEffect(() => {

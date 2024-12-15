@@ -13,9 +13,6 @@ const Summary = ({ name, advice, way, summary, holland }: summaryType) => {
   const filterHolland =
     holland.length > 1 && holland[0].length > 30 ? holland.slice(1) : holland
 
-  console.log(filterWay)
-  console.log(filterHolland)
-
   return (
     <div className="mx-5 mb-4 mt-2 rounded-[1.25rem] bg-white">
       <div className="px-6 py-7">

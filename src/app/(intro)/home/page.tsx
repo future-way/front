@@ -1,8 +1,18 @@
+'use client'
+
 import Guide from '@/components/Guide'
 import TItle from '@/components/TItle'
 import ButtonBar from '@/components/ButtonBar'
+import { useEffect } from 'react'
 
 export default function Page() {
+  useEffect(() => {
+    if (!sessionStorage.getItem('hasRefreshed')) {
+      sessionStorage.setItem('hasRefreshed', 'true')
+      window.location.reload()
+    }
+  }, [])
+
   return (
     <>
       <main className="flex flex-1 flex-col items-center justify-center">
