@@ -19,7 +19,7 @@ const UseChoice = () => {
 
   return (
     <>
-      <div className="mt-6 flex w-full flex-col justify-center px-5">
+      <section className="mt-6 flex w-full flex-col justify-center px-5">
         <div className="bg-pos-size-auto w-full bg-[url('/images/line.png')] bg-no-repeat">
           {steps.map((step, idx) => {
             return (
@@ -46,7 +46,7 @@ const UseChoice = () => {
             )
           })}
         </div>
-      </div>
+      </section>
     </>
   )
 }

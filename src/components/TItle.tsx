@@ -1,4 +1,4 @@
-interface titleType {
+interface TitleProps {
   text1: string
   text2?: string
   img: string
@@ -6,15 +6,15 @@ interface titleType {
   imgClassName?: string
 }
 
-const TItle = ({
+const Title = ({
   text1,
-  text2,
+  text2 = '',
   img,
   className = '',
   imgClassName = '',
-}: titleType) => {
+}: TitleProps) => {
   return (
-    <>
+    <section>
       {img && (
         <div className={`${imgClassName}`}>
           <img className="m-auto" src={img} alt="" />
@@ -26,8 +26,8 @@ const TItle = ({
         {text1}
         <span className="block">{text2}</span>
       </h2>
-    </>
+    </section>
   )
 }
 
-export default TItle
+export default Title

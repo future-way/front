@@ -10,6 +10,7 @@ const Logo = () => {
       router.push('/home')
     }, 800)
   }, [])
+
   return (
     <div className="flex h-dvh flex-col justify-center bg-white">
       <div className="m-auto h-auto w-[175px]">

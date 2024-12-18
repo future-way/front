@@ -1,12 +1,12 @@
 'use client'
 
 import { useNameStore } from '@/store/store'
-import TItle from '@/components/TItle'
+import Title from '@/components/Title'
 
 const ChoiceTitle = () => {
   const { name } = useNameStore()
   return (
-    <TItle
+    <Title
       text1={`${name}님`}
       text2="어떤 진로 고민이 있나요?"
       img="/images/img2.png"

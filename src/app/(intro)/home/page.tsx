@@ -1,7 +1,7 @@
 'use client'
 
 import Guide from '@/components/Guide'
-import TItle from '@/components/TItle'
+import Title from '@/components/Title'
 import ButtonBar from '@/components/ButtonBar'
 import { useEffect } from 'react'
 
@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <>
       <main className="flex flex-1 flex-col items-center justify-center">
-        <TItle
+        <Title
           text1="만나서 반가워요!"
           img="/images/img1.png"
           className="mb-6 mt-0 text-l"
@@ -27,7 +27,7 @@ export default function Page() {
         />
       </main>
       <ButtonBar
-        path="/title"
+        path="/Title"
         text="안녕 모모!"
         className="bg-orange1 py-4 text-base text-white"
       />

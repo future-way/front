@@ -1,10 +1,10 @@
-interface cardType {
+interface CardProps {
   name: string
   holland: Array<string>
   userImgType: number
 }
 
-const Card = ({ name, holland: holland, userImgType }: cardType) => {
+const Card = ({ name, holland: holland, userImgType }: CardProps) => {
   return (
     <div className="mx-5 rounded-[1.25rem] bg-white py-8">
       <h2 className="text-2xl">

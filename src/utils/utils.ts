@@ -1,3 +1,5 @@
+import { ChatMessage } from '@/app/(chat)/chat/chat'
+
 export function isBtnActive(path: string, btnActive: boolean) {
   if (['/choice', '/disarray-type'].includes(path)) {
     return !btnActive
@@ -19,5 +21,28 @@ export function selectTypeOrCheckPage(num: number) {
 
     default:
       return '/check'
+  }
+}
+
+export function checkUserType(choiceType: number, yesOrNo: number) {
+  if (choiceType !== 0) {
+    return choiceType === 1 ? '망설임형' : '막막형'
+  }
+  return yesOrNo === 0 ? '혼란형-확신' : '혼란형-불확신'
+}
+
+export function getChatMessage(
+  questionMessage: string,
+  sender: 'user' | 'api',
+  id?: number,
+): ChatMessage {
+  return {
+    questionMessage,
+    sender,
+    timestamp: new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
+    id,
   }
 }

@@ -4,23 +4,20 @@ import { steps } from '@/app/(intro)/choice/usechoice'
 import { useType } from '@/lib/api'
 import { usePostUser, useUserType } from '@/lib/useQuery'
 import { choiceNumStore, useNameStore, yesOrNoStore } from '@/store/store'
-import { isBtnActive, selectTypeOrCheckPage } from '@/utils/utils'
+import {
+  checkUserType,
+  isBtnActive,
+  selectTypeOrCheckPage,
+} from '@/utils/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-interface buttonBarType {
+interface ButtonBarProps {
   isShowReSelect?: boolean
   path: string
   text: string
   className?: string
-}
-
-function checkUserType(choiceType: number, yesOrNo: number) {
-  if (choiceType !== 0) {
-    return choiceType === 1 ? '망설임형' : '막막형'
-  }
-  return yesOrNo === 0 ? '혼란형-확신' : '혼란형-불확신'
 }
 
 const ButtonBar = ({
@@ -28,7 +25,7 @@ const ButtonBar = ({
   className,
   text,
   isShowReSelect = false,
-}: buttonBarType) => {
+}: ButtonBarProps) => {
   const router = useRouter()
   const queryClient = useQueryClient()
   const { num } = choiceNumStore()
@@ -109,7 +106,7 @@ const ButtonBar = ({
 
   return (
     <>
-      <div className="mb-8 px-5">
+      <footer className="mb-8 px-5">
         {isShowReSelect && (
           <button
             onClick={onClickReSelectPage}
@@ -132,7 +129,7 @@ const ButtonBar = ({
         >
           {text}
         </button>
-      </div>
+      </footer>
     </>
   )
 }

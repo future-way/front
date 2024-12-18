@@ -1,5 +1,5 @@
 import Guide from '@/components/Guide'
-import TItle from '@/components/TItle'
+import Title from '@/components/Title'
 import ButtonBar from '@/components/ButtonBar'
 import YesOrNo from './yesorno'
 
@@ -7,7 +7,7 @@ const page = () => {
   return (
     <>
       <main className="flex flex-1 flex-col items-center justify-center">
-        <TItle
+        <Title
           text1="현재 관심있는 분야가 있나요"
           text2="있나요?"
           img="/images/img2.png"

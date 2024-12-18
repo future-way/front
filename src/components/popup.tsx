@@ -1,6 +1,6 @@
 import Button from './Button'
 
-interface popupType {
+interface PopupProps {
   title1: string
   title2: string
   guide1: string
@@ -20,7 +20,7 @@ const Popup = ({
   onclick1,
   onclick2,
   guide2 = '',
-}: popupType) => {
+}: PopupProps) => {
   return (
     <div className="fixed left-0 top-0 flex h-dvh w-full items-center justify-center bg-black bg-opacity-50">
       <div className="mx-8 w-full rounded-2xl bg-white p-4 pt-7">

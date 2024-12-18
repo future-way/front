@@ -2,7 +2,7 @@
 
 import { ChangeEvent } from 'react'
 
-interface buttonType {
+interface ButtonProps {
   placeholder: string
   type: string
   value?: string
@@ -16,13 +16,13 @@ const Input = ({
   value,
   onTextChange,
   clasName,
-}: buttonType) => {
+}: ButtonProps) => {
   return (
     <>
       <input
         type={type}
         value={value}
-        className={`border-gray7 w-full rounded-lg border p-3.5 text-gray1 ${clasName}`}
+        className={`w-full rounded-lg border border-gray7 p-3.5 text-gray1 ${clasName}`}
         onChange={onTextChange}
         placeholder={placeholder}
       />

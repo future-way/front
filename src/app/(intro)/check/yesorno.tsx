@@ -1,19 +1,7 @@
 'use client'
 
+import { btnCont } from '@/constants'
 import { yesOrNoStore } from '@/store/store'
-
-const btnCont = [
-  {
-    img: 11,
-    imgAlt: '웃는 얼굴',
-    content: '네, 있어요',
-  },
-  {
-    img: 12,
-    imgAlt: '슬픈 얼굴',
-    content: '아니요, 없어요',
-  },
-]
 
 const YesOrNo = () => {
   const { yesOrNo, setYesOrNo } = yesOrNoStore()

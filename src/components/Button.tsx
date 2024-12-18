@@ -1,5 +1,5 @@
 'use client'
-interface buttonType {
+interface ButtonProps {
   text: string | React.ReactNode
   className?: string
   onclick?: () => void
@@ -11,7 +11,7 @@ const Button = ({
   className,
   onclick,
   isRounded = false,
-}: buttonType) => {
+}: ButtonProps) => {
   const classNameArr = (className ?? '').split(' ')
   const isWidth =
     classNameArr.includes('w-auto') || classNameArr.includes('w-6')

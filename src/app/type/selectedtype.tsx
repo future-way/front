@@ -1,8 +1,8 @@
 import Guide from '@/components/Guide'
-import TItle from '@/components/TItle'
+import Title from '@/components/Title'
 import ButtonBar from '@/components/ButtonBar'
 
-export interface selectedType {
+export interface SelectedTypeProps {
   badge: string
   title1: string
   title2: string
@@ -18,7 +18,7 @@ const SelectedType = ({
   guide1,
   guide2,
   imgNum,
-}: selectedType) => {
+}: SelectedTypeProps) => {
   return (
     <>
       <main className="flex flex-1 flex-col items-center justify-center">
@@ -27,7 +27,7 @@ const SelectedType = ({
             <span className="inline-block rounded-full bg-orange1 px-5 py-2 font-pretendardSemiBold text-[1.0625rem] text-white">
               {badge}
             </span>
-            <TItle
+            <Title
               text1={title1}
               text2={title2}
               img=""

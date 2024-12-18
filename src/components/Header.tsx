@@ -3,14 +3,14 @@
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Button from './Button'
-interface type {
+interface HeaderProps {
   isShowBackBtn: boolean
   width: number
   prevLink: string
   onClick?: () => {}
 }
 
-const Header = ({ width, isShowBackBtn, prevLink }: type) => {
+const Header = ({ width, isShowBackBtn, prevLink }: HeaderProps) => {
   const router = useRouter()
 
   useEffect(() => {

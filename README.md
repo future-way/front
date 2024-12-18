@@ -13,7 +13,8 @@
 
 ## 구현 기능
 
-- Next JS 15 App Router 버전 적용하여 사이트를 구현
+- Next JS 15 App Router 버전 적용하여 사이트를 routing을 구현
+- page.tsx와 layout.tsx를 사용하여 페이지를 구현
 - Tailwind CSS를 적용하여 CSS를 구현
 - React Query를 사용하여 서버 사이드의 데이터를 관리
 - Zustand로 클라이언트 사이드의 전역 변수를 관리

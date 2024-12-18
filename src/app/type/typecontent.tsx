@@ -1,12 +1,12 @@
 'use client'
 
 import Header from '@/components/Header'
-import SelectedType, { selectedType } from './selectedtype'
+import SelectedType, { SelectedTypeProps } from './selectedtype'
 import Loading from '@/components/loading/loading'
 import { useNameStore } from '@/store/store'
 import { useEffect, useState } from 'react'
 
-const TypeContent = ({ type }: { type: selectedType }) => {
+const TypeContent = ({ type }: { type: SelectedTypeProps }) => {
   const { name } = useNameStore()
   const [active, setActive] = useState(false)
   const [count, setCount] = useState(0)

@@ -1,12 +1,12 @@
 import UserName from './username'
-import TItle from '@/components/TItle'
+import Title from '@/components/Title'
 import ButtonBar from '@/components/ButtonBar'
 
 const page = () => {
   return (
     <>
       <main className="m-11 mx-5 flex flex-1 flex-col items-center">
-        <TItle
+        <Title
           text1="뭐라고 부를까요?"
           img="/images/img2.png"
           imgClassName="w-[3.6rem]"

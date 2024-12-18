@@ -1,11 +1,7 @@
 import Chat from './chat'
 
 const page = () => {
-  return (
-    <>
-      <Chat></Chat>
-    </>
-  )
+  return <Chat />
 }
 
 export default page

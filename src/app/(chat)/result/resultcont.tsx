@@ -15,14 +15,7 @@ import Popup from '@/components/popup'
 import { useRouter } from 'next/navigation'
 import { API_URL, resultType } from '@/lib/api'
 import progressAxios from '@/lib/progressAxios'
-
-const hollandType = ['현실형', '탐구형', '예술형', '사회형', '진취형', '관습형']
-const imgType: { [key: string]: number } = {
-  '혼란형-불확신': 20,
-  '혼란형-확신': 18,
-  망설임형: 19,
-  막막형: 25,
-}
+import { resultImgType } from '@/constants'
 
 const ResultCont = () => {
   const { name, userId, setUserName, resetUserId } = useNameStore()
@@ -57,7 +50,7 @@ const ResultCont = () => {
         const { userType, summary, hollandTypes, recommend } = resultSummary
 
         if (userType) {
-          setUserImgType(imgType[userType])
+          setUserImgType(resultImgType[userType])
         }
 
         if (hollandTypes) {

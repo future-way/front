@@ -2,15 +2,19 @@
 
 import { FC, useEffect, useRef } from 'react'
 
-interface Props {
+interface CircularProgressBarProps {
   strokeWidth?: number
   sqSize?: number
   percentage: number
   img: string
 }
 
-const CircularProgressBar: FC<Props> = (props) => {
-  const { strokeWidth = 8, sqSize = 160, percentage, img } = props
+const CircularProgressBar = ({
+  strokeWidth = 8,
+  sqSize = 160,
+  percentage,
+  img,
+}: CircularProgressBarProps) => {
   const svgRef = useRef<SVGCircleElement>(null)
   const radius = (sqSize - strokeWidth) / 2
   const viewBox = `0 0 ${sqSize} ${sqSize}`

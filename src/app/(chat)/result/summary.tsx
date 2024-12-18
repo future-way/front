@@ -1,4 +1,4 @@
-interface summaryType {
+interface summaryProps {
   advice: Array<string>
   way: Array<string>
   summary: string
@@ -6,7 +6,7 @@ interface summaryType {
   holland: Array<string>
 }
 
-const Summary = ({ name, advice, way, summary, holland }: summaryType) => {
+const Summary = ({ name, advice, way, summary, holland }: summaryProps) => {
   const filterWay = way.length > 1 && way[0].length > 30 ? way.slice(1) : way
   const filterAdvice =
     advice.length > 1 && advice[0].length > 30 ? advice.slice(1) : advice
