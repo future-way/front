@@ -16,6 +16,30 @@ import { useRouter } from 'next/navigation'
 import { API_URL, resultType } from '@/lib/api'
 import progressAxios from '@/lib/progressAxios'
 import { resultImgType } from '@/constants'
+import {
+  getFilteredArrayForResult,
+  removeDontUseResultText,
+} from '@/utils/utils'
+import { objForKeyAny } from '@/types'
+
+function getFilterResultToArray(arr: objForKeyAny[]) {
+  let [tmp1, tmp2, tmp4] = [[], [], []] as Array<Array<string>>
+  let tmp3 = ''
+
+  arr.forEach((item) => {
+    if (item['title'].includes('조언 및 계획')) {
+      tmp1 = item.cont as Array<string>
+    } else if (item['title'].includes('추천 진로')) {
+      tmp2 = item.cont as Array<string>
+    } else if (item['title'].includes('상담 결과 요약 내용')) {
+      tmp3 = item.cont as string
+    } else if (item['title'].includes('홀랜드 유형 3개')) {
+      tmp4 = item.cont as Array<string>
+    }
+  })
+
+  return [tmp1, tmp2, tmp3, tmp4]
+}
 
 const ResultCont = () => {
   const { name, userId, setUserName, resetUserId } = useNameStore()
@@ -56,71 +80,29 @@ const ResultCont = () => {
         if (hollandTypes) {
           setHolland(hollandTypes)
         }
-        const userSummary = summary.split(/\n{2,}|\:\*\*/)
-        const useRecommend = recommend.split(/\n{2,}|\:\*\*/)
-        let obj = { title: '', cont: [] as Array<string> }
-        let filterResultToArray: Array<{
-          [key: string]: string | Array<string>
-        }> = []
 
-        userSummary.forEach((item: string, idx) => {
-          const txt = item.replace(/\*/g, '')
-          if (txt.length !== 0) {
-            const isTitle =
-              txt.includes('홀랜드 유형 3개') ||
-              txt.includes('상담 결과 요약 내용')
+        const userSummary = removeDontUseResultText(summary)
+        const useRecommend = removeDontUseResultText(recommend)
+        const filterResultToArray: Array<objForKeyAny> = [
+          ...[userSummary, useRecommend]
+            .map((item, index) => {
+              const [title1, title2] =
+                index === 0
+                  ? ['홀랜드 유형 3개', '상담 결과 요약 내용']
+                  : ['추천 진로', '조언 및 계획']
 
-            if (isTitle && txt.length > 0) {
-              filterResultToArray.push(obj)
-              obj = { title: '', cont: [] }
-              obj.title = txt
-            } else {
-              obj.cont.push(txt.trim() as string)
+              return getFilteredArrayForResult(item, title1, title2)
+            })
+            .flat(),
+        ]
 
-              if (userSummary.length - 1 === idx && obj.title !== '') {
-                filterResultToArray.push(obj)
-              }
-            }
-          }
-        })
+        let [tmpAdvice, tmpWay, tmpSummary, tmpHollandDetail] =
+          getFilterResultToArray(filterResultToArray)
 
-        obj = { title: '', cont: [] }
-
-        useRecommend.forEach((item: string, idx) => {
-          const txt = item.replace(/\*/g, '')
-          if (txt.length !== 0) {
-            const isTitle =
-              txt.includes('추천 진로') || txt.includes('조언 및 계획')
-
-            if (isTitle && txt.length > 0) {
-              filterResultToArray.push(obj)
-              obj = { title: '', cont: [] }
-              obj.title = txt
-            } else {
-              const recomm = '다음과 같은 진로를 추천합니다.'
-
-              if (!txt.includes(recomm)) {
-                obj.cont.push(txt.trim() as string)
-              }
-
-              if (useRecommend.length - 1 === idx && obj.title !== '') {
-                filterResultToArray.push(obj)
-              }
-            }
-          }
-        })
-
-        filterResultToArray.forEach((item) => {
-          if (item['title'].includes('조언 및 계획')) {
-            setAdvice(item.cont as Array<string>)
-          } else if (item['title'].includes('추천 진로')) {
-            setWay(item.cont as Array<string>)
-          } else if (item['title'].includes('상담 결과 요약 내용')) {
-            setSummary(item.cont as string)
-          } else if (item['title'].includes('홀랜드 유형 3개')) {
-            setHollandDetail(item.cont as Array<string>)
-          }
-        })
+        setAdvice(tmpAdvice as string[])
+        setWay(tmpWay as string[])
+        setSummary(tmpSummary as string)
+        setHollandDetail(tmpHollandDetail as string[])
 
         setLoading(false)
       }

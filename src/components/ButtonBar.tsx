@@ -1,6 +1,6 @@
 'use client'
 
-import { steps } from '@/app/(intro)/choice/usechoice'
+import { userCurrentType } from '@/constants'
 import { useType } from '@/lib/api'
 import { usePostUser, useUserType } from '@/lib/useQuery'
 import { choiceNumStore, useNameStore, yesOrNoStore } from '@/store/store'
@@ -84,7 +84,7 @@ const ButtonBar = ({
     } else if (path === '/chat') {
       postUserTypeMutate({
         userId: userId as number,
-        selectType: steps[num],
+        selectType: userCurrentType[num],
         question: `${name}님 어떤 진로 고민이 있나요? 고민을 구체적으로 정해주면 더 정확하게 도와줄 수 있어요.`,
         answer:
           num !== 0

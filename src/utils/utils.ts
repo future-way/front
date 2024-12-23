@@ -1,4 +1,4 @@
-import { ChatMessage } from '@/app/(chat)/chat/chat'
+import { ChatMessage } from '@/types'
 
 export function isBtnActive(path: string, btnActive: boolean) {
   if (['/choice', '/disarray-type'].includes(path)) {
@@ -45,4 +45,49 @@ export function getChatMessage(
     }),
     id,
   }
+}
+
+export function removeDontUseResultText(text: string) {
+  return text.split(/\n{2,}|\:\*\*/)
+}
+
+export function getFilteredArrayForResult(
+  arr: Array<string>,
+  title1: string,
+  title2: string,
+) {
+  const recomm = '다음과 같은 진로를 추천합니다.'
+  let filterResultToArray: Array<{
+    [key: string]: string | Array<string>
+  }> = []
+  const isLastTitle = title1 === '추천 진로' || title2 === '조언 및 계획'
+
+  arr.forEach((item: string, idx) => {
+    let obj = { title: '', cont: [] as Array<string> }
+    const txt = item.replace(/\*/g, '')
+
+    if (txt.length !== 0) {
+      const isTitle = txt.includes(title1) || txt.includes(title2)
+
+      if (isTitle && txt.length > 0) {
+        filterResultToArray.push(obj)
+        obj = { title: '', cont: [] }
+        obj.title = txt
+      } else {
+        if ((isLastTitle && !txt.includes(recomm)) || !isLastTitle) {
+          obj.cont.push(txt.trim() as string)
+        }
+
+        if (arr.length - 1 === idx && obj.title !== '') {
+          filterResultToArray.push(obj)
+        }
+      }
+    }
+  })
+
+  return filterResultToArray
+}
+
+export function checkUnUseFirstChildArr(arr: string[]) {
+  return arr.length > 1 && arr[0].length > 30 ? arr.slice(1) : arr
 }

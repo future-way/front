@@ -1,12 +1,7 @@
 'use client'
 
+import { userCurrentType } from '@/constants'
 import { choiceNumStore } from '@/store/store'
-
-export const steps = [
-  '무슨일을 해야할지 모르겠어',
-  '이 길이 맞는지 확신이 안서',
-  '이 길로 가려면 뭘 해야하는지 잘 모르겠어',
-]
 
 const imgList = [4, 13, 14]
 
@@ -21,7 +16,7 @@ const UseChoice = () => {
     <>
       <section className="mt-6 flex w-full flex-col justify-center px-5">
         <div className="bg-pos-size-auto w-full bg-[url('/images/line.png')] bg-no-repeat">
-          {steps.map((step, idx) => {
+          {userCurrentType.map((step, idx) => {
             return (
               <button
                 onClick={() => onClickBtn(idx)}

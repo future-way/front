@@ -9,13 +9,7 @@ import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 import Message from './message'
 import { getChatMessage } from '@/utils/utils'
 import Header from './header'
-
-export interface ChatMessage {
-  id?: number
-  questionMessage: string
-  sender: 'user' | 'api'
-  timestamp?: string
-}
+import { ChatMessage } from '@/types'
 
 const Chat = () => {
   const { name, userId } = useNameStore()
@@ -179,7 +173,7 @@ const Chat = () => {
       <div className="height-chat m-auto flex max-w-[100%] flex-col">
         <div className="mb-3 flex-grow overflow-y-auto p-[0.625rem]">
           {messages.map((msg, index) => {
-            return <Message {...msg} index={index} />
+            return <Message key={index} {...msg} index={index} />
           })}
         </div>
 

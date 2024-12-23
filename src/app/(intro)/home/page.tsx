@@ -27,7 +27,7 @@ export default function Page() {
         />
       </main>
       <ButtonBar
-        path="/Title"
+        path="/title"
         text="안녕 모모!"
         className="bg-orange1 py-4 text-base text-white"
       />

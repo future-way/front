@@ -1,4 +1,4 @@
-import { ChatMessage } from './chat'
+import { ChatMessage } from '@/types'
 
 interface Message extends ChatMessage {
   index: number
@@ -38,9 +38,12 @@ const Message = ({ questionMessage, sender, timestamp, index }: Message) => {
     )
   }
 
+  const [align, justifyItem, itemsAlign] =
+    sender === 'user' ? ['right', 'end', 'end'] : ['left', 'start', 'start']
+
   return (
     <div
-      className={`mb-2 flex flex-col ${sender === 'user' ? 'text-right' : 'text-left'} ${sender === 'user' ? 'justify-end' : 'justify-start'} ${sender === 'user' ? 'items-end' : 'items-start'}`}
+      className={`mb-2 flex flex-col text-${align} justify-${justifyItem} items-${itemsAlign}`}
       key={index}
     >
       {sender === 'api' && (

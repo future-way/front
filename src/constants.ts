@@ -52,3 +52,9 @@ export const resultImgType: { [key: string]: number } = {
   망설임형: 19,
   막막형: 25,
 }
+
+export const userCurrentType = [
+  '무슨일을 해야할지 모르겠어',
+  '이 길이 맞는지 확신이 안서',
+  '이 길로 가려면 뭘 해야하는지 잘 모르겠어',
+]
