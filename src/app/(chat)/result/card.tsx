@@ -10,7 +10,9 @@ const Card = ({ name, holland: holland, userImgType }: CardProps) => {
       <h2 className="text-2xl">
         <span className="text-orange1">{name}</span>님 상담카드
       </h2>
-      <p className="text-m text-gray1">{new Date().toLocaleDateString()}</p>
+      <p className="mt-[0.875rem] text-m text-gray1">
+        {new Date().toLocaleDateString()}
+      </p>
       <div className="m-auto w-60">
         <img className="m-auto" src={`/images/img${userImgType}.png`} alt="" />
       </div>

@@ -2,10 +2,19 @@
 
 import { userCurrentType } from '@/constants'
 import { choiceNumStore } from '@/store/store'
+import { useEffect } from 'react'
 
 const imgList = [4, 13, 14]
 
 const UseChoice = () => {
+  useEffect(() => {
+    const container = document.querySelector('.desktop_width') as HTMLElement
+
+    if (container) {
+      container.style.overflowY = 'visible'
+    }
+  }, [])
+
   const { num, setChoiceNum } = choiceNumStore()
 
   const onClickBtn = (num: number) => {

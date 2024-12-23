@@ -9,7 +9,7 @@ const page = () => {
         <Title
           text1="뭐라고 부를까요?"
           img="/images/img2.png"
-          imgClassName="w-[3.6rem]"
+          imgClassName="w-[3.6rem] m-auto"
         />
         <UserName />
       </main>

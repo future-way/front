@@ -22,7 +22,7 @@ const Popup = ({
   guide2 = '',
 }: PopupProps) => {
   return (
-    <div className="fixed left-0 top-0 flex h-dvh w-full items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed left-0 top-0 z-10 flex h-dvh w-full items-center justify-center bg-black bg-opacity-50">
       <div className="mx-8 w-full rounded-2xl bg-white p-4 pt-7">
         <h3 className="text-center font-pretendardBold text-xl font-bold text-black">
           {title1}

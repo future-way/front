@@ -171,7 +171,7 @@ const Chat = () => {
       )}
       <Header onGoPrevPage={onGoPrevPage} onCounselClose={onCounselClose} />
       <div className="height-chat m-auto flex max-w-[100%] flex-col">
-        <div className="mb-3 flex-grow overflow-y-auto p-[0.625rem]">
+        <div className="no_scrollbar mb-3 flex-grow overflow-y-auto p-[0.625rem]">
           {messages.map((msg, index) => {
             return <Message key={index} {...msg} index={index} />
           })}
@@ -213,7 +213,7 @@ const Chat = () => {
               ref={textRef}
               rows={1}
               placeholder="메시지를 입력하기"
-              className="mb-3 w-full rounded-3xl bg-gray5 p-5 pr-10 text-gray1"
+              className="no_scrollbar mb-3 w-full resize-none rounded-3xl bg-gray5 p-5 pr-10 text-gray1"
             />
             <button
               onClick={handleSendMessage}

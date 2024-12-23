@@ -38,12 +38,12 @@ const Message = ({ questionMessage, sender, timestamp, index }: Message) => {
     )
   }
 
-  const [align, justifyItem, itemsAlign] =
-    sender === 'user' ? ['right', 'end', 'end'] : ['left', 'start', 'start']
+  const [align, justifyItem] =
+    sender === 'user' ? ['right', 'end'] : ['left', 'start']
 
   return (
     <div
-      className={`mb-2 flex flex-col text-${align} justify-${justifyItem} items-${itemsAlign}`}
+      className={`mb-2 flex flex-col text-${align} justify-${justifyItem} ${sender === 'user' ? 'items-end' : 'items-start'}`}
       key={index}
     >
       {sender === 'api' && (

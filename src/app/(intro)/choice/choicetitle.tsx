@@ -11,7 +11,7 @@ const ChoiceTitle = () => {
       text2="어떤 진로 고민이 있나요?"
       img="/images/img2.png"
       className="mb-6 mt-0 font-black"
-      imgClassName="w-[3.6rem]"
+      imgClassName="w-[3.6rem] m-auto"
     />
   )
 }
