@@ -46,14 +46,16 @@ const Chat = () => {
 
   const handleResizeHeight = useCallback(() => {
     if (textRef.current !== null) {
+      const { scrollHeight, clientHeight } = textRef.current
+
       if (input.trim().length === 0) {
-        textRef.current.style.height = '56px'
+        textRef.current.setSelectionRange(input.length, input.length)
         return
       }
 
-      textRef.current.style.height = '0px'
-      const height = textRef.current.scrollHeight
-      textRef.current.style.height = (height === 64 ? 56 : height) + 'px'
+      textRef.current.style.height = 'auto'
+      textRef.current.style.height =
+        (scrollHeight !== clientHeight ? clientHeight : scrollHeight) + 'px'
     }
   }, [textRef, input])
 
@@ -204,32 +206,34 @@ const Chat = () => {
             )}
           </div>
         ) : (
-          <div className="relative px-3">
-            <textarea
-              value={input}
-              onChange={onChangeInput}
-              onKeyDown={onKeyDown}
-              onInput={handleResizeHeight}
-              ref={textRef}
-              rows={1}
-              placeholder="메시지를 입력하기"
-              className="no_scrollbar mb-3 w-full resize-none rounded-3xl bg-gray5 p-5 pr-10 text-gray1"
-            />
-            <button
-              onClick={handleSendMessage}
-              className="absolute right-3 rounded-[1.25rem] p-[0.65rem]"
-              disabled={input.trim().length === 0}
-            >
-              <span
-                className={`flex h-7 w-7 items-center rounded-full bg-${input.trim().length === 0 ? 'gray2' : 'black'}`}
+          <div className="mb-[1.125rem] px-3">
+            <div className="relative flex">
+              <textarea
+                value={input}
+                onChange={onChangeInput}
+                onKeyDown={onKeyDown}
+                onInput={handleResizeHeight}
+                ref={textRef}
+                rows={1}
+                placeholder="메시지를 입력하기"
+                className="no_scrollbar w-full resize-none rounded-2xl bg-gray5 py-[0.875rem] pl-5 pr-11 text-slg text-gray1"
+              />
+              <button
+                onClick={handleSendMessage}
+                className="t-chat-btn absolute right-4 rounded-[1.25rem]"
+                disabled={input.trim().length === 0}
               >
-                <img
-                  className="m-auto w-3"
-                  src="/images/img24.png"
-                  alt="입력하기 버튼"
-                />
-              </span>
-            </button>
+                <span
+                  className={`flex h-7 w-7 items-center rounded-full bg-${input.trim().length === 0 ? 'gray2' : 'black'}`}
+                >
+                  <img
+                    className="m-auto w-3"
+                    src="/images/img24.png"
+                    alt="입력하기 버튼"
+                  />
+                </span>
+              </button>
+            </div>
           </div>
         )}
       </div>

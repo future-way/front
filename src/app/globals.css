@@ -23,12 +23,17 @@
   font-style: normal;
 }
 
+html,
+body {
+  font-family: 'pretendardMedium', sans-serif;
+  font-synthesis: none;
+}
+
 body {
   margin: 0;
   padding: 0;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 html {
@@ -84,6 +89,11 @@ html {
 
   .height-chat {
     height: calc(100dvh - 48px);
+  }
+
+  .t-chat-btn {
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   @keyframes typing {
