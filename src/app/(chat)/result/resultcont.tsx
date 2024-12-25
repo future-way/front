@@ -44,7 +44,9 @@ function getFilterResultToArray(arr: objForKeyAny[]) {
 
 const ResultCont = () => {
   const queryClient = useQueryClient()
-  const { name, userId } = queryClient.getQueryData(['userData']) as useType
+  const userInfo = queryClient.getQueryData(['userData']) as useType
+  const userId = userInfo?.userId ?? 0
+  const name = userInfo?.name ?? '김아무개'
   const { setUserName } = useNameStore()
   const { setChoiceNum } = choiceNumStore()
   const router = useRouter()
