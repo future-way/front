@@ -2,10 +2,7 @@ import { create } from 'zustand'
 
 interface UserInfo {
   name: string
-  userId: number | null
   setUserName: (name: string) => void
-  setuserId: (userId: number) => void
-  resetUserId: () => void
 }
 
 export const useNameStore = create<UserInfo>((set) => ({
@@ -13,12 +10,6 @@ export const useNameStore = create<UserInfo>((set) => ({
   userId: null,
   setUserName: (name) => {
     set((state) => ({ name }))
-  },
-  setuserId: (userId) => {
-    set((state) => ({ userId }))
-  },
-  resetUserId: () => {
-    set((state) => ({ userId: null }))
   },
 }))
 

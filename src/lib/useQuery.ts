@@ -1,11 +1,4 @@
-import {
-  postForResult,
-  postUserName,
-  postUserType,
-  resultType,
-  useSelectType,
-  useType,
-} from '@/lib/api'
+import { postUserName, postUserType, useSelectType, useType } from '@/lib/api'
 import {
   useMutation,
   UseMutationResult,

@@ -29,7 +29,9 @@ const ButtonBar = ({
   const router = useRouter()
   const queryClient = useQueryClient()
   const { num } = choiceNumStore()
-  const { name, userId, setuserId } = useNameStore()
+  const { name } = useNameStore()
+  const [isGoNextPage, setIsGoNextPage] = useState(false)
+  const useInfo = queryClient.getQueryData(['userData']) as useType
   const { yesOrNo } = yesOrNoStore()
   const { mutate: postUserMutate } = usePostUser()
   const { mutate: postUserTypeMutate } = useUserType()
@@ -50,12 +52,11 @@ const ButtonBar = ({
     }, [name])
 
     useEffect(() => {
-      const userInfo = queryClient.getQueryData(['userData'])
-      if (userInfo) {
-        setuserId((userInfo as useType).userId)
+      if (useInfo?.userId && isGoNextPage) {
         router.push(path)
+        setIsGoNextPage(false)
       }
-    }, [queryClient.getQueryData(['userData'])])
+    }, [useInfo?.userId, isGoNextPage])
   }
 
   if (path === '/disarray-type') {
@@ -78,12 +79,13 @@ const ButtonBar = ({
       router.push(selectTypeOrCheckPage(num))
     } else if (path === '/choice') {
       postUserMutate(name)
+      setIsGoNextPage(true)
     } else if (path === '/disarray-type') {
       setBtnActive(false)
       router.push(`/type?id=${yesOrNo === 0 ? 'one' : 'two'}`)
     } else if (path === '/chat') {
       postUserTypeMutate({
-        userId: userId as number,
+        userId: useInfo.userId as number,
         selectType: userCurrentType[num],
         question: `${name}님 어떤 진로 고민이 있나요? 고민을 구체적으로 정해주면 더 정확하게 도와줄 수 있어요.`,
         answer:

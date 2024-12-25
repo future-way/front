@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Button from './Button'
+
 interface HeaderProps {
   isShowBackBtn: boolean
   width: number
@@ -21,7 +22,7 @@ const Header = ({ width, isShowBackBtn, prevLink }: HeaderProps) => {
 
   const onBackPage = () => {
     if (prevLink) {
-      router.push(prevLink)
+      router.replace(prevLink)
     }
   }
   return (

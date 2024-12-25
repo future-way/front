@@ -13,7 +13,7 @@ import {
 } from '@/store/store'
 import Popup from '@/components/popup'
 import { useRouter } from 'next/navigation'
-import { API_URL, resultType } from '@/lib/api'
+import { API_URL, resultType, useType } from '@/lib/api'
 import progressAxios from '@/lib/progressAxios'
 import { resultImgType } from '@/constants'
 import {
@@ -21,6 +21,7 @@ import {
   removeDontUseResultText,
 } from '@/utils/utils'
 import { objForKeyAny } from '@/types'
+import { useQueryClient } from '@tanstack/react-query'
 
 function getFilterResultToArray(arr: objForKeyAny[]) {
   let [tmp1, tmp2, tmp4] = [[], [], []] as Array<Array<string>>
@@ -42,7 +43,9 @@ function getFilterResultToArray(arr: objForKeyAny[]) {
 }
 
 const ResultCont = () => {
-  const { name, userId, setUserName, resetUserId } = useNameStore()
+  const queryClient = useQueryClient()
+  const { name, userId } = queryClient.getQueryData(['userData']) as useType
+  const { setUserName } = useNameStore()
   const { setChoiceNum } = choiceNumStore()
   const router = useRouter()
   const { setYesOrNo } = yesOrNoStore()
@@ -136,7 +139,6 @@ const ResultCont = () => {
   const onReStart = () => {
     router.push('/home')
     setUserName('')
-    resetUserId()
     setChoiceNum(0)
     setYesOrNo(-1)
   }

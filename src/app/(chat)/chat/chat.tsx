@@ -2,7 +2,7 @@
 
 import Button from '@/components/Button'
 import Popup from '@/components/popup'
-import { postFirstQuestion, postForAnswer } from '@/lib/api'
+import { postFirstQuestion, postForAnswer, useType } from '@/lib/api'
 import { useNameStore } from '@/store/store'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
@@ -10,9 +10,11 @@ import Message from './message'
 import { getChatMessage } from '@/utils/utils'
 import Header from './header'
 import { ChatMessage } from '@/types'
+import { useQueryClient } from '@tanstack/react-query'
 
 const Chat = () => {
-  const { name, userId } = useNameStore()
+  const queryClient = useQueryClient()
+  const { name, userId } = queryClient.getQueryData(['userData']) as useType
   const router = useRouter()
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState<string>('')
