@@ -14,7 +14,9 @@ import { useQueryClient } from '@tanstack/react-query'
 
 const Chat = () => {
   const queryClient = useQueryClient()
-  const { name, userId } = queryClient.getQueryData(['userData']) as useType
+  const userInfo = queryClient.getQueryData(['userData']) as useType
+  const userId = userInfo?.userId ?? 0
+  const name = userInfo?.name ?? '김아무개'
   const router = useRouter()
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState<string>('')
