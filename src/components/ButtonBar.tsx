@@ -1,7 +1,7 @@
 'use client'
 
 import { userCurrentType } from '@/constants'
-import { useType } from '@/lib/api'
+import { useSelectType, useType } from '@/lib/api'
 import { usePostUser, useUserType } from '@/lib/useQuery'
 import { choiceNumStore, useNameStore, yesOrNoStore } from '@/store/store'
 import {
@@ -30,8 +30,9 @@ const ButtonBar = ({
   const queryClient = useQueryClient()
   const { num } = choiceNumStore()
   const { name } = useNameStore()
-  const [isGoNextPage, setIsGoNextPage] = useState(false)
+  const [isGoPrevPage, setIsGoPrevPage] = useState(false)
   const useInfo = queryClient.getQueryData(['userData']) as useType
+  const userType = queryClient.getQueryData(['userType']) as useSelectType
   const { yesOrNo } = yesOrNoStore()
   const { mutate: postUserMutate } = usePostUser()
   const { mutate: postUserTypeMutate } = useUserType()
@@ -52,11 +53,11 @@ const ButtonBar = ({
     }, [name])
 
     useEffect(() => {
-      if (useInfo?.userId && isGoNextPage) {
+      if (useInfo?.userId && isGoPrevPage) {
         router.push(path)
-        setIsGoNextPage(false)
+        setIsGoPrevPage(false)
       }
-    }, [useInfo?.userId, isGoNextPage])
+    }, [useInfo?.userId, isGoPrevPage])
   }
 
   if (path === '/disarray-type') {
@@ -73,13 +74,21 @@ const ButtonBar = ({
     }, [yesOrNo])
   }
 
+  if (path === '/chat') {
+    useEffect(() => {
+      if (userType?.selectType) {
+        router.push(path)
+      }
+    }, [userType?.selectType])
+  }
+
   const onClickNextPage = async () => {
     if (path === '/type') {
       setBtnActive(false)
       router.push(selectTypeOrCheckPage(num))
     } else if (path === '/choice') {
       postUserMutate(name)
-      setIsGoNextPage(true)
+      setIsGoPrevPage(true)
     } else if (path === '/disarray-type') {
       setBtnActive(false)
       router.push(`/type?id=${yesOrNo === 0 ? 'one' : 'two'}`)
@@ -94,9 +103,6 @@ const ButtonBar = ({
             : `현재관심있는분야가있나요?${yesOrNo === 0 ? '네,있어요' : '아니요,없어요'}`,
         userType: checkUserType(num, yesOrNo),
       })
-      setTimeout(() => {
-        router.push(path)
-      }, 150)
     } else {
       router.push(path)
     }
