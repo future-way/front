@@ -61,17 +61,19 @@ export function getFilteredArrayForResult(
     [key: string]: string | Array<string>
   }> = []
   const isLastTitle = title1 === '추천 진로' || title2 === '조언 및 계획'
+  let obj = { title: '', cont: [] as Array<string> }
 
   arr.forEach((item: string, idx) => {
-    let obj = { title: '', cont: [] as Array<string> }
-    const txt = item.replace(/\*/g, '')
+    const txt = item.replace(/\*/g, '').trim()
 
     if (txt.length !== 0) {
       const isTitle = txt.includes(title1) || txt.includes(title2)
 
       if (isTitle && txt.length > 0) {
-        filterResultToArray.push(obj)
-        obj = { title: '', cont: [] }
+        if (obj.title.length > 0) {
+          filterResultToArray.push(obj)
+          obj = { title: '', cont: [] }
+        }
         obj.title = txt
       } else {
         if ((isLastTitle && !txt.includes(recomm)) || !isLastTitle) {
