@@ -11,7 +11,7 @@ const YesOrNo = () => {
   }
 
   return (
-    <div className="mt-8 flex w-full gap-4 px-5">
+    <section className="mt-8 flex w-full gap-4 px-5">
       {btnCont.map((item, idx) => {
         return (
           <button
@@ -30,7 +30,7 @@ const YesOrNo = () => {
           </button>
         )
       })}
-    </div>
+    </section>
   )
 }
 

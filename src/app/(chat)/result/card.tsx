@@ -6,7 +6,7 @@ interface CardProps {
 
 const Card = ({ name, holland: holland, userImgType }: CardProps) => {
   return (
-    <div className="mx-5 rounded-[1.25rem] bg-white py-8">
+    <section className="mx-5 rounded-[1.25rem] bg-white py-8">
       <h2 className="text-2xl">
         <span className="text-orange1">{name}</span>님 상담카드
       </h2>
@@ -36,7 +36,7 @@ const Card = ({ name, holland: holland, userImgType }: CardProps) => {
           진취적인 모험가입니다.
         </p>
       </div> */}
-    </div>
+    </section>
   )
 }
 

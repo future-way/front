@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 const imgList = [4, 13, 14]
 
-const UseChoice = () => {
+const UserChoice = () => {
   useEffect(() => {
     const container = document.querySelector('.desktop_width') as HTMLElement
 
@@ -55,4 +55,4 @@ const UseChoice = () => {
   )
 }
 
-export default UseChoice
+export default UserChoice

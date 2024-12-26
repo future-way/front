@@ -17,7 +17,7 @@ const UserName = () => {
   }
 
   return (
-    <div className="relative mt-8 w-full text-left">
+    <section className="relative mt-8 w-full text-left">
       <Input
         value={name}
         onTextChange={onChange}
@@ -29,7 +29,7 @@ const UserName = () => {
         <span className="font-pretendardMedium text-gray4">{name.length} </span>
         / 10
       </p>
-    </div>
+    </section>
   )
 }
 

@@ -1,4 +1,6 @@
 import { ChatMessage } from '@/types'
+import FirstMessage from './firstmessage'
+import AIProfile from './aiprofile'
 
 interface Message extends ChatMessage {
   index: number
@@ -8,30 +10,12 @@ const Message = ({ questionMessage, sender, timestamp, index }: Message) => {
   if (index === 0) {
     return (
       <div key={index} className="items-left mb-1 gap-2">
-        <div className="inline-flex items-center gap-2">
-          <img className="h-auto w-10" src="/images/img22.png" alt="" />
-          <p className="font-pretendardSemiBold text-m text-black">모모</p>
-        </div>
+        <AIProfile />
         {questionMessage
           .split('\n')
           .filter((text) => text.length > 0)
           .map((message, idx) => {
-            return (
-              <div
-                className={`mb-2 flex w-auto max-w-[90%] flex-col items-start justify-start text-right`}
-                key={idx}
-              >
-                <div
-                  className={`rounded-left w-auto max-w-[90%] bg-gray5 px-4 py-2.5`}
-                >
-                  <p
-                    className={`whitespace-pre-wrap text-left text-slg font-medium text-black`}
-                  >
-                    {message}
-                  </p>
-                </div>
-              </div>
-            )
+            return <FirstMessage key={idx} message={message} />
           })}
         <p className="mt-1 text-xxs text-gray1">{timestamp}</p>
       </div>
@@ -46,14 +30,7 @@ const Message = ({ questionMessage, sender, timestamp, index }: Message) => {
       className={`mb-2 flex flex-col text-${align} justify-${justifyItem} ${sender === 'user' ? 'items-end' : 'items-start'}`}
       key={index}
     >
-      {sender === 'api' && (
-        <>
-          <div className="mb-1 inline-flex items-center gap-2">
-            <img className="h-auto w-10" src="/images/img22.png" alt="" />
-            <p className="font-pretendardSemiBold text-m text-black">모모</p>
-          </div>
-        </>
-      )}
+      {sender === 'api' && <AIProfile className="mb-1" />}
       <div
         className={`w-auto max-w-[90%] px-4 py-2.5 ${sender === 'user' ? 'rounded-right bg-orange1' : 'rounded-left bg-gray5'} `}
       >

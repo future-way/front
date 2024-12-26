@@ -4,23 +4,16 @@ import Header from '@/components/Header'
 import SelectedType, { SelectedTypeProps } from './selectedtype'
 import Loading from '@/components/loading/loading'
 import { useNameStore } from '@/store/store'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import useType from '@/hook/useType'
 
 const TypeContent = ({ type }: { type: SelectedTypeProps }) => {
   const { name } = useNameStore()
-  const [active, setActive] = useState(false)
-  const [count, setCount] = useState(0)
+  const { calCount, active, count } = useType()
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCount((old) => {
-        const newCount = old + 10
-        if (newCount > 100) {
-          clearInterval(interval)
-          setActive(true)
-        }
-        return newCount
-      })
+      calCount(interval)
     }, 500)
 
     return () => clearInterval(interval)
