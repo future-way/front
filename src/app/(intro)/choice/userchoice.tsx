@@ -37,7 +37,6 @@ const UserChoice = () => {
                   className={`${num === idx ? 'h-9 w-9' : 'h-4 w-4 rounded-full bg-gray5'}`}
                 >
                   {num === idx ? (
-                    // <img src={`/images/img${imgList[idx]}.png`} alt="" />
                     <Image
                       className="!static w-3"
                       src={`/images/img${imgList[idx]}.png`}

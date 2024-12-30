@@ -42,7 +42,7 @@ const InputField = ({
             <Image
               className="!static m-auto !w-3"
               src="/images/img24.png"
-              alt="막입력하기 버튼"
+              alt="입력하기 버튼"
               priority
               fill
               style={{ objectFit: 'contain' }}

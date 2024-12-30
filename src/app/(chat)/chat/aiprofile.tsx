@@ -7,7 +7,6 @@ interface AIProfileProps {
 const AIProfile = ({ className = '' }: AIProfileProps) => {
   return (
     <div className={`${className} inline-flex items-center gap-2`}>
-      {/* <img className="h-auto w-10" src="/images/img22.png" alt="" /> */}
       <Image
         className="!static !w-auto"
         src="/images/img22.png"

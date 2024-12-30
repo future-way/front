@@ -13,7 +13,6 @@ const Header = ({ onGoPrevPage, onCounselClose }: HeaderProps) => {
         onclick={onGoPrevPage}
         className="absolute inset-y-0 left-[10px] w-6"
         text={
-          /*<img src="/images/icon-arrow-back.png" alt="뒤로가기" /> */
           <Image
             className="!static w-full"
             src="/images/icon-arrow-back.png"

@@ -41,7 +41,6 @@ const SelectedType = ({
             />
           </div>
           <div>
-            {/* <img src={`/images/img${imgNum}.png`} alt="막막함 마스코트" /> */}
             <Image
               className="!static w-auto"
               src={`/images/img${imgNum}.png`}

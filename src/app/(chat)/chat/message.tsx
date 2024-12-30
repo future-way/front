@@ -39,11 +39,6 @@ const Message = ({ questionMessage, sender, timestamp, index }: Message) => {
           className={`whitespace-pre-wrap text-left text-slg ${sender === 'api' && questionMessage === '' && 'h-11'} font-medium ${sender === 'user' ? 'text-white' : 'text-black'}`}
         >
           {sender === 'api' && questionMessage === '' ? (
-            // <img
-            //   className="animate-typing w-12 leading-[2.75rem]"
-            //   src="/images/img23.png"
-            //   alt="loading"
-            // />
             <Image
               className="animate-typing !static !w-12 leading-[2.75rem]"
               src="/images/img23.png"

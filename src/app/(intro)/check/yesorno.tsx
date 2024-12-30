@@ -21,7 +21,6 @@ const YesOrNo = () => {
             className={`${yesOrNo === idx ? 'border bg-orange4 bg-opacity-5' : 'bg-gray5'} w-full rounded-2xl border-orange4 py-12`}
           >
             <div className="m-auto mb-3 w-[4.7rem]">
-              {/* <img src={`/images/img${item.img}.png`} alt={item.imgAlt} /> */}
               <Image
                 className="!static w-full"
                 src={`/images/img${item.img}.png`}
