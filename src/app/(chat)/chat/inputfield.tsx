@@ -1,4 +1,4 @@
-import Button from '@/components/Button'
+import Image from 'next/image'
 import { ChangeEvent, RefObject } from 'react'
 
 interface ResultBtnsProps {
@@ -39,10 +39,13 @@ const InputField = ({
           <span
             className={`flex h-7 w-7 items-center rounded-full bg-${input.trim().length === 0 ? 'gray2' : 'black'}`}
           >
-            <img
-              className="m-auto w-3"
+            <Image
+              className="!static m-auto !w-3"
               src="/images/img24.png"
-              alt="입력하기 버튼"
+              alt="막입력하기 버튼"
+              priority
+              fill
+              style={{ objectFit: 'contain' }}
             />
           </span>
         </button>

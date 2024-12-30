@@ -1,4 +1,5 @@
 import Button from '@/components/Button'
+import Image from 'next/image'
 
 interface HeaderProps {
   onGoPrevPage: () => void
@@ -11,7 +12,17 @@ const Header = ({ onGoPrevPage, onCounselClose }: HeaderProps) => {
       <Button
         onclick={onGoPrevPage}
         className="absolute inset-y-0 left-[10px] w-6"
-        text={<img src="/images/icon-arrow-back.png" alt="뒤로가기" />}
+        text={
+          /*<img src="/images/icon-arrow-back.png" alt="뒤로가기" /> */
+          <Image
+            className="!static w-full"
+            src="/images/icon-arrow-back.png"
+            alt="뒤로가기"
+            priority
+            fill
+            style={{ objectFit: 'contain' }}
+          />
+        }
       />
       <h1 className="py-3 text-center font-pretendardSemiBold text-base text-gray1">
         내일상담

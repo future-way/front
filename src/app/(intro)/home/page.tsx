@@ -19,6 +19,7 @@ export default function Page() {
         <Title
           text1="만나서 반가워요!"
           img="/images/img1.png"
+          alt="돋보기를 들고 있는 마스코트 모모"
           className="mb-6 mt-0 text-l"
         />
         <Guide

@@ -11,8 +11,9 @@ const page = () => {
           text1="현재 관심있는 분야가 있나요"
           text2="있나요?"
           img="/images/img2.png"
+          alt="현재 관심있는 분야가 있는지 묻는 마스코트 모모"
           className="mb-3 mt-0 font-black"
-          imgClassName="w-[3.6rem]"
+          imgClassName="w-[3.6rem]  m-auto"
         />
         <Guide
           text1="아직 해당 분야에"

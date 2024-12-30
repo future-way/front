@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Button from './Button'
@@ -33,10 +34,13 @@ const Header = ({ width, isShowBackBtn, prevLink }: HeaderProps) => {
             onclick={onBackPage}
             className="absolute inset-y-0 left-[10px] w-6"
             text={
-              <img
-                className="w-auto"
+              <Image
+                className="!static w-full"
                 src="/images/icon-arrow-back.png"
                 alt="뒤로가기"
+                priority
+                fill
+                style={{ objectFit: 'contain' }}
               />
             }
           />

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { userCurrentType } from '@/constants'
 import { useSelectType, useType } from '@/lib/api'
 import { usePostUser, useUserType } from '@/lib/useQuery'
@@ -122,10 +123,13 @@ const ButtonBar = ({
           >
             진로 고민 다시 선택하기
             <div className="w-4">
-              <img
-                className="w-auto"
+              <Image
+                className="!static w-full"
                 src="/images/img6.png"
                 alt="진로 고민 다시 선택하기 아이콘"
+                priority
+                fill
+                style={{ objectFit: 'contain' }}
               />
             </div>
           </button>

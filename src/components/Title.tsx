@@ -1,7 +1,10 @@
+import Image from 'next/image'
+
 interface TitleProps {
   text1: string
   text2?: string
   img: string
+  alt?: string
   className?: string
   imgClassName?: string
 }
@@ -10,6 +13,7 @@ const Title = ({
   text1,
   text2 = '',
   img,
+  alt = '',
   className = '',
   imgClassName = '',
 }: TitleProps) => {
@@ -17,7 +21,14 @@ const Title = ({
     <section>
       {img && (
         <div className={`${imgClassName}`}>
-          <img className="m-auto" src={img} alt="" />
+          <Image
+            className="!static w-full"
+            src={img}
+            alt={alt}
+            priority
+            fill
+            style={{ objectFit: 'contain' }}
+          />
         </div>
       )}
       <h2

@@ -9,6 +9,7 @@ const page = () => {
         <Title
           text1="뭐라고 부를까요?"
           img="/images/img2.png"
+          alt="뭐라고 부를지 묻는 마스코트 모모"
           imgClassName="w-[3.6rem] m-auto"
         />
         <UserName />

@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 interface CardProps {
   name: string
   holland: Array<string>
@@ -14,7 +16,15 @@ const Card = ({ name, holland: holland, userImgType }: CardProps) => {
         {new Date().toLocaleDateString()}
       </p>
       <div className="m-auto w-60">
-        <img className="m-auto" src={`/images/img${userImgType}.png`} alt="" />
+        {/* <img className="m-auto" src={`/images/img${userImgType}.png`} alt="" /> */}
+        <Image
+          className="!static m-auto"
+          src={`/images/img${userImgType}.png`}
+          alt=""
+          priority
+          fill
+          style={{ objectFit: 'contain' }}
+        />
       </div>
       <div className="mt-[2.2rem]">
         <ul className="flex flex-wrap justify-center gap-2">

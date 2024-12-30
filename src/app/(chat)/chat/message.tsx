@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { ChatMessage } from '@/types'
 import FirstMessage from './firstmessage'
 import AIProfile from './aiprofile'
@@ -38,10 +39,18 @@ const Message = ({ questionMessage, sender, timestamp, index }: Message) => {
           className={`whitespace-pre-wrap text-left text-slg ${sender === 'api' && questionMessage === '' && 'h-11'} font-medium ${sender === 'user' ? 'text-white' : 'text-black'}`}
         >
           {sender === 'api' && questionMessage === '' ? (
-            <img
-              className="animate-typing w-12 leading-[2.75rem]"
+            // <img
+            //   className="animate-typing w-12 leading-[2.75rem]"
+            //   src="/images/img23.png"
+            //   alt="loading"
+            // />
+            <Image
+              className="animate-typing !static !w-12 leading-[2.75rem]"
               src="/images/img23.png"
               alt="loading"
+              priority
+              fill
+              style={{ objectFit: 'contain' }}
             />
           ) : (
             questionMessage

@@ -1,6 +1,5 @@
 'use client'
 
-import Button from '@/components/Button'
 import Popup from '@/components/popup'
 import { useType } from '@/lib/api'
 import { useEffect } from 'react'

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Providers from '../utils/providers'
 
 import './globals.css'
@@ -40,7 +41,14 @@ export default function RootLayout({
         <Providers>
           <>
             <div className="intro_txt">
-              <img src="/images/intro_txt.png" alt="소개" />
+              <Image
+                className="!static w-full"
+                src="/images/intro_txt.png"
+                alt="내일 찾기 - 미래를 고민하는 대학생들을 위한 진로고민 서비스"
+                priority
+                fill
+                style={{ objectFit: 'contain' }}
+              />
             </div>
             <div className="desktop_width m-auto min-w-[300px] max-w-[600px]">
               {children}

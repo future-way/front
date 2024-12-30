@@ -1,6 +1,7 @@
 import Guide from '@/components/Guide'
 import Title from '@/components/Title'
 import ButtonBar from '@/components/ButtonBar'
+import Image from 'next/image'
 
 export interface SelectedTypeProps {
   badge: string
@@ -40,7 +41,15 @@ const SelectedType = ({
             />
           </div>
           <div>
-            <img src={`/images/img${imgNum}.png`} alt="막막함 마스코트" />
+            {/* <img src={`/images/img${imgNum}.png`} alt="막막함 마스코트" /> */}
+            <Image
+              className="!static w-auto"
+              src={`/images/img${imgNum}.png`}
+              alt="막막함 마스코트"
+              priority
+              fill
+              style={{ objectFit: 'contain' }}
+            />
           </div>
         </div>
       </main>
