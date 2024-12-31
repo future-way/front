@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { ChatMessage } from '@/types'
-import FirstMessage from './firstmessage'
-import AIProfile from './aiprofile'
+import FirstMessage from '@/components/chat/firstmessage'
+import AIProfile from '@/components/chat/aiprofile'
 
 interface Message extends ChatMessage {
   index: number

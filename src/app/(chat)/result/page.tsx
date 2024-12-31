@@ -1,7 +1,13 @@
-import ResultCont from './resultcont'
+import Result from './result'
+import Loading from './loading'
 
 const page = () => {
-  return <ResultCont />
+  return (
+    <>
+      <Loading />
+      <Result />
+    </>
+  )
 }
 
 export default page

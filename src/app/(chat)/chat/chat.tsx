@@ -3,7 +3,7 @@
 import Popup from '@/components/popup'
 import { useType } from '@/lib/api'
 import { useEffect } from 'react'
-import Message from './message'
+import Message from '@/components/chat/message'
 import Header from './header'
 import { useQueryClient } from '@tanstack/react-query'
 import useChat, { useGoPrevPage, useResizeHeight } from '@/hook/useChat'

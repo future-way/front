@@ -1,3 +1,4 @@
+import { resultType } from '@/lib/api'
 import { create } from 'zustand'
 
 interface UserInfo {
@@ -46,5 +47,25 @@ export const progressBarStore = create<progressBar>((set) => ({
   progressNum: 0,
   setProgressBar: (progressNum) => {
     set((state) => ({ progressNum }))
+  },
+}))
+
+interface Result {
+  loading: boolean
+  result: resultType
+  status: number
+  setLoading: (loading: boolean) => void
+  setResult: (result: resultType, status: number) => void
+}
+
+export const resultStore = create<Result>((set) => ({
+  result: {} as resultType,
+  status: 0,
+  loading: false,
+  setLoading: (loading) => {
+    set((state) => ({ loading }))
+  },
+  setResult: (result, status) => {
+    set((state) => ({ result, status }))
   },
 }))
