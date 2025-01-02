@@ -1,6 +1,6 @@
-import TypeContent from './typecontent'
 import { SelectedTypeProps } from './selectedtype'
 import { userTypes } from '@/constants'
+import TypeContent from './typecontent'
 
 type queryParams = Promise<{ id: string }>
 

@@ -1,8 +1,8 @@
 'use client'
 
-import Input from '@/components/Input'
-import { useNameStore } from '@/store/store'
 import { ChangeEvent } from 'react'
+import { useNameStore } from '@/store/store'
+import Input from '@/components/Input'
 
 const UserName = () => {
   const { name, setUserName } = useNameStore()

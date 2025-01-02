@@ -1,6 +1,9 @@
 'use client'
 
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { userCurrentType } from '@/constants'
 import { useSelectType, useType } from '@/lib/api'
 import { usePostUser, useUserType } from '@/lib/useQuery'
@@ -10,9 +13,6 @@ import {
   isBtnActive,
   selectTypeOrCheckPage,
 } from '@/utils/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
 interface ButtonBarProps {
   isShowReSelect?: boolean

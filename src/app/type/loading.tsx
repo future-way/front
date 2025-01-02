@@ -1,7 +1,7 @@
 'use client'
 
-import CompontLoading from '@/components/loading/loading'
 import { useNameStore } from '@/store/store'
+import CompontLoading from '@/components/loading/loading'
 
 interface LoadingProps {
   count: number

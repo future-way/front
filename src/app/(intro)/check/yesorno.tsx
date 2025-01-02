@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { btnCont } from '@/constants'
 import { yesOrNoStore } from '@/store/store'
+import { btnCont } from '@/constants'
 
 const YesOrNo = () => {
   const { yesOrNo, setYesOrNo } = yesOrNoStore()

@@ -1,9 +1,9 @@
 'use client'
 
-import Header from '@/components/Header'
-import SelectedType, { SelectedTypeProps } from './selectedtype'
 import { useEffect } from 'react'
+import SelectedType, { SelectedTypeProps } from './selectedtype'
 import useType from '@/hook/useType'
+import Header from '@/components/Header'
 import Loading from './loading'
 
 const TypeContent = ({ type }: { type: SelectedTypeProps }) => {

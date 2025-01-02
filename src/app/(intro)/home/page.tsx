@@ -1,9 +1,9 @@
 'use client'
 
+import { useEffect } from 'react'
 import Guide from '@/components/Guide'
 import Title from '@/components/Title'
 import ButtonBar from '@/components/ButtonBar'
-import { useEffect } from 'react'
 
 export default function Page() {
   useEffect(() => {

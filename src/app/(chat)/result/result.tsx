@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import progressAxios from '@/lib/progressAxios'
+import { useEffect } from 'react'
 import { API_URL, resultType, useType } from '@/lib/api'
 import { useRetart } from '@/hook/useResult'
 import { resultStore } from '@/store/store'

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface CircularProgressBarProps {
   strokeWidth?: number

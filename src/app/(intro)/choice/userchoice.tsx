@@ -1,9 +1,9 @@
 'use client'
 
+import { useEffect } from 'react'
 import Image from 'next/image'
 import { userCurrentType } from '@/constants'
 import { choiceNumStore } from '@/store/store'
-import { useEffect } from 'react'
 
 const imgList = [4, 13, 14]
 

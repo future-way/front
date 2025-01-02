@@ -1,5 +1,5 @@
-import Button from '@/components/Button'
 import Image from 'next/image'
+import Button from '@/components/Button'
 
 interface HeaderProps {
   onGoPrevPage: () => void

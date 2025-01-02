@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { useType } from '@/lib/api'
 import useChat, { useGoPrevPage, useResizeHeight } from '@/hook/useChat'
 import Message from './components/message'

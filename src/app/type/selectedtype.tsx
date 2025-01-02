@@ -1,7 +1,7 @@
+import Image from 'next/image'
 import Guide from '@/components/Guide'
 import Title from '@/components/Title'
 import ButtonBar from '@/components/ButtonBar'
-import Image from 'next/image'
 
 export interface SelectedTypeProps {
   badge: string
