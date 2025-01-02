@@ -1,13 +1,14 @@
 'use client'
 
 import { useEffect } from 'react'
-import Popup from '@/components/popup'
-import { API_URL, resultType, useType } from '@/lib/api'
 import { useQueryClient } from '@tanstack/react-query'
+import progressAxios from '@/lib/progressAxios'
+import { API_URL, resultType, useType } from '@/lib/api'
 import { useRetart } from '@/hook/useResult'
 import { resultStore } from '@/store/store'
-import Content from './content'
-import progressAxios from '@/lib/progressAxios'
+import Content from './components/content'
+import Popup from '@/components/popup'
+import ErrorPage from '@/app/global-error'
 
 const getResult = async (
   userId: number,
@@ -18,6 +19,10 @@ const getResult = async (
   })
 
   setResult(res.data, res.status)
+
+  if (res.status !== 200) {
+    return <ErrorPage errorText={res.statusText} />
+  }
 }
 
 const Result = () => {

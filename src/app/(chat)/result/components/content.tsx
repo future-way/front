@@ -1,9 +1,9 @@
-import Button from '@/components/Button'
-import Card from '@/components/result/card'
-import Summary from '@/components/result/summary'
-import { resultType } from '@/lib/api'
-import Header from './header'
 import { getResultData } from '@/hook/useResult'
+import { resultType } from '@/lib/api'
+import Button from '@/components/Button'
+import Card from './card'
+import Summary from './summary'
+import Header from './header'
 
 interface ContentProps {
   result: resultType
