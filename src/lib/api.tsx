@@ -9,7 +9,6 @@ export interface useType {
   name: string
 }
 
-// 서버 목록 조회
 export const postUserName = async (name: string): Promise<useType> => {
   try {
     const data = {
