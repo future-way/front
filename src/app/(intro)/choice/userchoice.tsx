@@ -8,6 +8,8 @@ import { choiceNumStore } from '@/store/store'
 const imgList = [4, 13, 14]
 
 const UserChoice = () => {
+  const { num, setChoiceNum } = choiceNumStore()
+
   useEffect(() => {
     const container = document.querySelector('.desktop_width') as HTMLElement
 
@@ -15,8 +17,6 @@ const UserChoice = () => {
       container.style.overflowY = 'visible'
     }
   }, [])
-
-  const { num, setChoiceNum } = choiceNumStore()
 
   const onClickBtn = (num: number) => {
     setChoiceNum(num as 0 | 1 | 2)

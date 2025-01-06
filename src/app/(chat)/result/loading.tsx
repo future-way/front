@@ -1,10 +1,10 @@
 'use client'
 
-import ComponentLoading from '@/components/loading/loading'
 import { useEffect } from 'react'
 import { progressBarStore, resultStore } from '@/store/store'
 import { useType } from '@/lib/api'
 import { useQueryClient } from '@tanstack/react-query'
+import ComponentLoading from '@/components/loading/loading'
 
 const Loading = () => {
   const queryClient = useQueryClient()
