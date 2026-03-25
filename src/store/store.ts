@@ -10,7 +10,7 @@ export const useNameStore = create<UserInfo>((set) => ({
   name: '',
   userId: null,
   setUserName: (name) => {
-    set((state) => ({ name }))
+    set({ name })
   },
 }))
 
@@ -22,7 +22,7 @@ interface ChoiceNum {
 export const choiceNumStore = create<ChoiceNum>((set) => ({
   num: 0,
   setChoiceNum: (num) => {
-    set((state) => ({ num }))
+    set({ num })
   },
 }))
 
@@ -34,7 +34,7 @@ interface YesOrNo {
 export const yesOrNoStore = create<YesOrNo>((set) => ({
   yesOrNo: -1,
   setYesOrNo: (yesOrNo) => {
-    set((state) => ({ yesOrNo }))
+    set({ yesOrNo })
   },
 }))
 
@@ -46,7 +46,7 @@ interface progressBar {
 export const progressBarStore = create<progressBar>((set) => ({
   progressNum: 0,
   setProgressBar: (progressNum) => {
-    set((state) => ({ progressNum }))
+    set({ progressNum })
   },
 }))
 
@@ -63,9 +63,9 @@ export const resultStore = create<Result>((set) => ({
   status: 0,
   loading: false,
   setLoading: (loading) => {
-    set((state) => ({ loading }))
+    set({ loading })
   },
   setResult: (result, status) => {
-    set((state) => ({ result, status }))
+    set({ result, status })
   },
 }))

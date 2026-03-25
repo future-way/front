@@ -9,7 +9,7 @@ interface HeaderProps {
   isShowBackBtn: boolean
   width: number
   prevLink: string
-  onClick?: () => {}
+  onClick?: () => void
 }
 
 const Header = ({ width, isShowBackBtn, prevLink }: HeaderProps) => {

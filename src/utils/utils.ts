@@ -57,7 +57,7 @@ export function getFilteredArrayForResult(
   title2: string,
 ) {
   const recomm = '다음과 같은 진로를 추천합니다.'
-  let filterResultToArray: Array<{
+  const filterResultToArray: Array<{
     [key: string]: string | Array<string>
   }> = []
   const isLastTitle = title1 === '추천 진로' || title2 === '조언 및 계획'

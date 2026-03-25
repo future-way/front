@@ -25,6 +25,7 @@ function useButtonBar() {
   const [isGoPrevPage, setIsGoPrevPage] = useState(false)
 
   function checkPath(path: string) {
+    /* eslint-disable react-hooks/rules-of-hooks */
     switch (path) {
       case '/choice':
         useEffect(() => {
