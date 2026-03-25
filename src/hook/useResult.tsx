@@ -73,7 +73,7 @@ export function getResultData(result: resultType) {
         .flat(),
     ]
 
-    let [tmpAdvice, tmpWay, tmpSummary, tmpHollandDetail] =
+    const [tmpAdvice, tmpWay, tmpSummary, tmpHollandDetail] =
       getFilterResultToArray(filterResultToArray)
 
     userResult = {
