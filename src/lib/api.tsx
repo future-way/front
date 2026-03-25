@@ -11,10 +11,8 @@ export interface useType {
 
 export const postUserName = async (name: string): Promise<useType> => {
   try {
-    const data = {
-      name,
-    }
-    const response = await axios.put<useType>(`${API_URL}/api/user/save`, data)
+    const data = { name }
+    const response = await axios.post<useType>(`${API_URL}/api/users`, data)
     return response.data
   } catch (error) {
     throw error
@@ -33,10 +31,10 @@ export const postUserType = async (
   userType: useSelectType,
 ): Promise<useSelectType> => {
   try {
-    const data = userType
-    const response = await axios.post<useSelectType>(
-      `${API_URL}/api/gemini/type`,
-      data,
+    const { userId, ...body } = userType
+    const response = await axios.put<useSelectType>(
+      `${API_URL}/api/users/${userId}/type`,
+      body,
     )
     return response.data
   } catch (error) {
@@ -56,10 +54,8 @@ export const postFirstQuestion = async (
   userId: number,
 ): Promise<questionType> => {
   try {
-    const data = { userId }
     const response = await axios.post<questionType>(
-      `${API_URL}/api/gemini`,
-      data,
+      `${API_URL}/api/consults/users/${userId}`,
     )
     return response.data
   } catch (error) {
@@ -68,7 +64,7 @@ export const postFirstQuestion = async (
 }
 
 export interface answerType {
-  aiConsultationHistoryId: number
+  questionId: number
   userId: number
   answer: null | string
 }
@@ -77,10 +73,10 @@ export const postForAnswer = async (
   answerType: answerType,
 ): Promise<questionType> => {
   try {
-    const data = answerType
+    const { questionId, userId, answer } = answerType
     const response = await axios.post<questionType>(
-      `${API_URL}/api/gemini/answer`,
-      data,
+      `${API_URL}/api/consults/${questionId}/answers`,
+      { userId, answer },
     )
     return response.data
   } catch (error) {
@@ -99,10 +95,8 @@ export interface resultType {
 
 export const postForResult = async (userId: number): Promise<resultType> => {
   try {
-    const data = { userId }
     const response = await axios.post<resultType>(
-      `${API_URL}/api/gemini/summary`,
-      data,
+      `${API_URL}/api/consults/users/${userId}/summary`,
     )
     return response.data
   } catch (error) {
