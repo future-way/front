@@ -49,7 +49,7 @@ function useChat(userId: number, name: string) {
       setMessages((prevMessages) => [...prevMessages, loadingMessage])
 
       const getAnswer = await postForAnswer({
-        aiConsultationHistoryId: id as number,
+        questionId: id as number,
         userId: userId as number,
         answer: input,
       })
